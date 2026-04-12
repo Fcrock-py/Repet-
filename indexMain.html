@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Repet+</title>
+    <link rel="stylesheet" href="styleMain.css">
+</head>
+<body>
+    <header class="header">
+        <div class="header-inner">
+            <div class="logo">
+                <div class="logo-icon">
+                    <img src="images/Frame 20.png">
+                </div>
+            </div>
+            <div class="header-nav">
+                <div class="dropdown" data-dropdown="subject">
+                    <button class="dropdown-toggle">
+                        Выбор предмета
+                        <svg class="chevron" width="12" height="12" viewBox="0 0 12 12"><path d="M3 4.5l3 3 3-3" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg>
+                    </button>
+                    <div class="dropdown-menu">
+                        <a href="#">Математика</a>
+                        <a href="#">Русский язык</a>
+                        <a href="#">Английский язык</a>
+                        <a href="#">Физика</a>
+                        <a href="#">Химия</a>
+                        <a href="#">Биология</a>
+                        <a href="#">Информатика</a>
+                        <a href="#">История</a>
+                        <a href="#">Обществознание</a>
+                        <a href="#">Литература</a>
+                    </div>
+                </div>
+                <div class="dropdown" data-dropdown="city">
+                    <button class="dropdown-toggle">
+                        Ваш город
+                        <svg class="chevron" width="12" height="12" viewBox="0 0 12 12"><path d="M3 4.5l3 3 3-3" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg>
+                    </button>
+                    <div class="dropdown-menu">
+                        <a href="#">Москва</a>
+                        <a href="#">Санкт-Петербург</a>
+                        <a href="#">Новосибирск</a>
+                        <a href="#">Екатеринбург</a>
+                        <a href="#">Казань</a>
+                        <a href="#">Нижний Новгород</a>
+                        <a href="#">Самара</a>
+                        <a href="#">Ростов-на-Дону</a>
+                    </div>
+                </div>
+            </div>
+            <a href="Auth.html"><button class="login-btn">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                    <circle cx="12" cy="7" r="4"/>
+                </svg>
+                Войти
+            </button></a>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero-section">
+            <div class="container">
+                <div class="hero-banner">
+                    <div class="hero-left">
+                        <div class="hero-top">
+                            <div class="hero-spacer"></div>
+                            <h1 class="hero-title">Найдите лучшего репетитора под ваши цели</h1>
+                        </div>
+                    </div>
+                    <div class="hero-bottom">
+                        <div class="hero-search-wrap">
+                            <div class="hero-search">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+                                <input type="text" placeholder="Поиск">
+                            </div>
+                            <div class="hero-hint">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                                <span>Введите например Английский язык или История</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="exams-section">
+            <div class="container">
+                <h2 class="section-title">Подготовка к государственным экзаменам</h2>
+                <div class="exam-tabs">
+                    <button class="exam-tab active" data-tab="ege">ЕГЭ</button>
+                    <button class="exam-tab" data-tab="oge">ОГЭ</button>
+                </div>
+                <div class="exam-panel active" id="ege">
+                    <div class="exam-grid">
+                        <div class="exam-card"><div class="exam-subject">Английский язык</div><div class="exam-count">2000+ преподавателей</div></div>
+                        <div class="exam-card"><div class="exam-subject">Информатика</div><div class="exam-count">1200+ преподавателей</div></div>
+                        <div class="exam-card"><div class="exam-subject">Обществознание</div><div class="exam-count">2100+ преподавателей</div></div>
+                        <div class="exam-card"><div class="exam-subject">История</div><div class="exam-count">1200+ преподавателей</div></div>
+                        <div class="exam-card"><div class="exam-subject">Базовая математика</div><div class="exam-count">2400+ преподавателей</div></div>
+                        <div class="exam-card"><div class="exam-subject">Проф. математика</div><div class="exam-count">1000+ преподавателей</div></div>
+                        <div class="exam-card"><div class="exam-subject">Физика</div><div class="exam-count">2200+ преподавателей</div></div>
+                        <div class="exam-card"><div class="exam-subject">Биология</div><div class="exam-count">1000+ преподавателей</div></div>
+                        <div class="exam-card"><div class="exam-subject">Русский язык</div><div class="exam-count">1800+ преподавателей</div></div>
+                        <div class="exam-card"><div class="exam-subject">Литература</div><div class="exam-count">1400+ преподавателей</div></div>
+                        <div class="exam-card"><div class="exam-subject">Химия</div><div class="exam-count">1500+ преподавателей</div></div>
+                        <div class="exam-card"><div class="exam-subject">Итоговое сочинение</div><div class="exam-count">1400+ преподавателей</div></div>
+                    </div>
+                </div>
+                <div class="exam-panel" id="oge">
+                    <div class="exam-grid">
+                        <div class="exam-card"><div class="exam-subject">Английский язык</div><div class="exam-count">1000+ преподавателей</div></div>
+                        <div class="exam-card"><div class="exam-subject">Информатика</div><div class="exam-count">1000+ преподавателей</div></div>
+                        <div class="exam-card"><div class="exam-subject">Обществознание</div><div class="exam-count">900+ преподавателей</div></div>
+                        <div class="exam-card"><div class="exam-subject">История</div><div class="exam-count">1100+ преподавателей</div></div>
+                        <div class="exam-card"><div class="exam-subject">Математика</div><div class="exam-count">2000+ преподавателей</div></div>
+                        <div class="exam-card"><div class="exam-subject">Биология</div><div class="exam-count">600+ преподавателей</div></div>
+                        <div class="exam-card"><div class="exam-subject">Физика</div><div class="exam-count">700+ преподавателей</div></div>
+                        <div class="exam-card"><div class="exam-subject">Немецкий язык</div><div class="exam-count">1100+ преподавателей</div></div>
+                        <div class="exam-card"><div class="exam-subject">Русский язык</div><div class="exam-count">1100+ преподавателей</div></div>
+                        <div class="exam-card"><div class="exam-subject">Литература</div><div class="exam-count">1000+ преподавателей</div></div>
+                        <div class="exam-card"><div class="exam-subject">Химия</div><div class="exam-count">500+ преподавателей</div></div>
+                        <div class="exam-card"><div class="exam-subject">География</div><div class="exam-count">1600+ преподавателей</div></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="about-section">
+            <div class="container">
+                <h2 class="section-title">Немного о нас</h2>
+                <div class="about-top">
+                    <div class="about-item">
+                        <div class="about-img" style="background-image: url(images/image\ 11.png); background-size: 100%;"></div>
+                        <p class="about-text">Более 40000 квалифицированных репетиторов</p>
+                    </div>
+                    <div class="about-item">
+                        <div class="about-img" style="background-image: url(images/image\ 12.png); background-size: 100%;"></div>
+                        <p class="about-text">Больше 21000 положительных отзывов по проведенным урокам</p>
+                    </div>
+                </div>
+                <div class="about-bottom">
+                    <div class="about-item">
+                        <div class="about-img" style="background-image: url(images/image\ 13.png); background-size: 100%;"></div>
+                        <p class="about-text">Около 300000 проведенных уроков</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="spheres-section">
+            <div class="container">
+                <h2 class="section-title">Все сферы репетиторов</h2>
+
+                <div class="sphere-card-wrapper">
+                    <div class="sphere-card sphere-green" data-sphere="school">
+                        <div class="sphere-content sphere-content-left">
+                            <h3 class="sphere-title">Школьные предметы</h3>
+                            <div class="sphere-search">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+                                <input type="text" class="sphere-search-input" placeholder="Поиск">
+                            </div>
+                            <div class="sphere-show-all">Показать всем списком <svg width="12" height="12" viewBox="0 0 12 12"><path d="M3 4.5l3 3 3-3" stroke="currentColor" stroke-width="1.5" fill="none"/></svg></div>
+                            <div class="sphere-tags">
+                                <span>Математика</span><span>Русский язык</span><span>Информатика</span><span>Биология</span><span>Химия</span><span>Физика</span><span>Литература</span><span>География</span><span>Обществознание</span><span>История</span>
+                            </div>
+                        </div>
+                        <div class="sphere-img-area sphere-img-right">
+                            <div class="sphere-img-placeholder" style="background-image: url(images/iStock-2188359086-no-bg-preview\ \(carve.photos\)\ 1.png); background-size: 100%;"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="sphere-card-wrapper">
+                    <div class="sphere-card sphere-purple" data-sphere="music">
+                        <div class="sphere-img-area sphere-img-left">
+                            <div class="sphere-img-placeholder" style="background-image: url(images/5eb56c029012ae20b4511338_651b494e9aea39.10983268\ 1.png); background-size: 100%;"></div>
+                        </div>
+                        <div class="sphere-content sphere-content-right">
+                            <h3 class="sphere-title">Музыка</h3>
+                            <div class="sphere-search">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+                                <input type="text" class="sphere-search-input" placeholder="Поиск">
+                            </div>
+                            <div class="sphere-show-all">Показать всем списком <svg width="12" height="12" viewBox="0 0 12 12"><path d="M3 4.5l3 3 3-3" stroke="currentColor" stroke-width="1.5" fill="none"/></svg></div>
+                            <div class="sphere-tags">
+                                <span>Гитара</span><span>Электрогитара</span><span>Скрипка</span><span>Фортепиано</span><span>Вокал</span><span>Сольфеджио</span><span>Барабаны</span><span>Баян</span><span>Саксафон</span><span>Флейта</span><span>Труба</span><span>Кларнет</span><span>Виолончель</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="sphere-card-wrapper">
+                    <div class="sphere-card sphere-blue" data-sphere="languages">
+                        <div class="sphere-content sphere-content-left">
+                            <h3 class="sphere-title">Иностранные языки</h3>
+                            <div class="sphere-search">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+                                <input type="text" class="sphere-search-input" placeholder="Поиск">
+                            </div>
+                            <div class="sphere-show-all">Показать всем списком <svg width="12" height="12" viewBox="0 0 12 12"><path d="M3 4.5l3 3 3-3" stroke="currentColor" stroke-width="1.5" fill="none"/></svg></div>
+                            <div class="sphere-tags">
+                                <span>Испанский</span><span>Китайский</span><span>Арабский</span><span>Английский</span><span>Немецкий</span><span>Финский</span><span>Французкий</span><span>Польский</span><span>Японский</span><span>Португальский</span><span>Итальянский</span>
+                            </div>
+                        </div>
+                        <div class="sphere-img-area sphere-img-right">
+                            <div class="sphere-img-placeholder" style="background-image: url(images/1200.06cd94957d4d587b68b86f093f423028.1687775974\ 1.png); background-size: 100%;"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="sphere-card-wrapper">
+                    <div class="sphere-card sphere-pink" data-sphere="higher">
+                        <div class="sphere-img-area sphere-img-left">
+                            <div class="sphere-img-placeholder" style="background-image: url(images/tutoronline-kurs-po-vysshej-matematike-dlya-studentov-2022-vasilij-rustamovich_64ceccfccce22\ \(2\)\ 1.png); background-size: 100%;"></div>
+                        </div>
+                        <div class="sphere-content sphere-content-right">
+                            <h3 class="sphere-title">Высшее образование</h3>
+                            <div class="sphere-search">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+                                <input type="text" class="sphere-search-input" placeholder="Поиск">
+                            </div>
+                            <div class="sphere-show-all">Показать всем списком <svg width="12" height="12" viewBox="0 0 12 12"><path d="M3 4.5l3 3 3-3" stroke="currentColor" stroke-width="1.5" fill="none"/></svg></div>
+                            <div class="sphere-tags">
+                                <span>Высшая математика</span><span>Теория вероятности</span><span>Сопромат</span><span>Алгебра логики</span><span>Экономика</span><span>Философия</span><span>Программирование</span><span>Журналистика</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="sphere-card-wrapper">
+                    <div class="sphere-card sphere-peach" data-sphere="other">
+                        <div class="sphere-content sphere-content-left">
+                            <h3 class="sphere-title">Другие репетиторы</h3>
+                            <div class="sphere-search">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+                                <input type="text" class="sphere-search-input" placeholder="Поиск">
+                            </div>
+                            <div class="sphere-show-all">Показать всем списком <svg width="12" height="12" viewBox="0 0 12 12"><path d="M3 4.5l3 3 3-3" stroke="currentColor" stroke-width="1.5" fill="none"/></svg></div>
+                            <div class="sphere-tags">
+                                <span>Подготовка к школе</span><span>Танцы</span><span>Компьютерная грамотность</span><span>Изобразительное искусство</span><span>Начальная школа</span><span>Логопед</span>
+                            </div>
+                        </div>
+                        <div class="sphere-img-area sphere-img-right">
+                            <div class="sphere-img-placeholder" style="background-image: url(images/orig-no-bg-preview\ \(carve.photos\)\ 1.png); background-size: 100%;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="tutor-section">
+            <div class="container">
+                <h2 class="section-title">Хотите стать у нас репетитором?</h2>
+                <div class="tutor-card">
+                    <div class="tutor-form-side">
+                        <h3 class="tutor-form-title">Подавайте заявку уже сейчас!</h3>
+                        <form class="tutor-form" onsubmit="return false;">
+                            <div class="form-group">
+                                <label>ФИО:</label>
+                                <div class="form-input-wrap">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="2"><circle cx="12" cy="7" r="4"/><path d="M5.5 21a8.38 8.38 0 0 1 13 0"/></svg>
+                                    <input type="text" placeholder="Иванов Иван Иванович">
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group-inline">
+                                    <label>Пол:</label>
+                                    <div class="gender-btns">
+                                        <button type="button" class="gender-btn active">М</button>
+                                        <button type="button" class="gender-btn">Ж</button>
+                                    </div>
+                                </div>
+                                <div class="form-group-inline">
+                                    <label>Возраст:</label>
+                                    <input type="text" placeholder="Укажите возраст" class="age-input">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Ваша электронная почта:</label>
+                                <div class="form-input-wrap">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 4l-10 8L2 4"/></svg>
+                                    <input type="email" placeholder="example@gmail.com">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Ваша номер телефона:</label>
+                                <div class="form-input-wrap">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                                    <input type="tel" placeholder="+7(000)000-00-00">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Предмет который вы ведёте:</label>
+                                <div class="form-input-wrap">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+                                    <input type="text" placeholder="Введите название предмета">
+                                </div>
+                            </div>
+                            <div class="form-submit">
+                                <button type="button" class="submit-btn" id="submitFormBtn">Оставить заявку</button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="tutor-img-side">
+                        <div class="tutor-img-placeholder" style="background-image: url(images/image\ 14.png); background-size: 100%;"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="contact-section">
+            <div class="container">
+                <h2 class="section-title">Остались вопросы? Позвоните нам!</h2>
+                <div class="contact-card">
+                    <div class="contact-left">
+                        <div class="contact-phone-row">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#555" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                            <span class="phone-number">+7(426)234-67-25</span>
+                        </div>
+                        <div class="phone-label">Телефон контактного центра</div>
+                    </div>
+                    <div class="contact-right">
+                        <p class="contact-hours-title">Вы можете нам позвонить с 9:00 по 21:00</p>
+                        <p class="contact-hours-text">в любой день недели и мы поможем вам!</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-inner">
+            <div class="footer-logo">
+                <div class="logo">
+                    <div class="logo-icon">
+                        <img src="images/Frame 20.png">
+                    </div>
+                </div>
+            </div>
+            <div class="footer-divider"></div>
+            <div class="footer-columns">
+                <div class="footer-col">
+                    <h4>Контактная информация</h4>
+                    <p>Москва, Мосфильмовская<br>ул, д. 27, помещ. 1/п</p>
+                    <p>+7(426)234-67-25</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Ученикам</h4>
+                    <a href="#">Найти репетитора</a>
+                    <a href="#">Материалы</a>
+                </div>
+                <div class="footer-col">
+                    <h4>О компании</h4>
+                    <a href="#">Работа у нас</a>
+                    <a href="#">Партнерская программа</a>
+                    <a href="#">Информация</a>
+                </div>
+                <div class="footer-col">
+                    <h4>Репетиторам</h4>
+                    <a href="#">Личный кабинет</a>
+                    <a href="#">Отправить заявку</a>
+                    <a href="#">Условие сотрудничества</a>
+                </div>
+            </div>
+            <div class="footer-social">
+                <h4>Социальные сети</h4>
+                <div class="social-icons">
+                    <a href="#" class="social-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.2-.08-.06-.19-.04-.27-.02-.12.03-1.99 1.27-5.62 3.72-.53.36-1.01.54-1.44.53-.47-.01-1.38-.27-2.06-.49-.83-.27-1.49-.42-1.43-.88.03-.24.37-.49 1.02-.74 3.99-1.74 6.65-2.89 7.99-3.45 3.8-1.6 4.59-1.88 5.1-1.89.11 0 .37.03.54.17.14.12.18.28.2.45-.01.06.01.24 0 .37z"/></svg>
+                    </a>
+                    <a href="#" class="social-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                    </a>
+                    <a href="#" class="social-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1v-3.5a6.37 6.37 0 0 0-.79-.05A6.34 6.34 0 0 0 3.15 15a6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.34-6.34V8.1a8.16 8.16 0 0 0 4.76 1.52v-3.4a4.85 4.85 0 0 1-1-.47z"/></svg>
+                    </a>
+                </div>
+            </div>
+            <div class="footer-divider"></div>
+            <div class="footer-copyright">
+                <p>© 2026, Сервис подбора репетиторов REPET+</p>
+                <p>ООО «НАЙДИ РЕПЕТИТОРА», ОГРН 676922842</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
