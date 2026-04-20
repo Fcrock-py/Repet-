@@ -154,7 +154,7 @@ input {
     height: 700px;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    gap: 50px;
     padding: 40px 50px;
     position: relative;
     overflow: hidden;
@@ -204,6 +204,7 @@ input {
 
 .hero-search {
     display: flex;
+    position: relative;
     align-items: center;
     gap: 10px;
     background: #fff;
@@ -218,6 +219,79 @@ input {
     font-size: 15px;
     flex: 1;
     background: transparent;
+}
+
+.hero-suggestion-box {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 0;
+    right: 0;
+    background: #fff;
+    border-radius: 14px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    z-index: 999;
+    overflow: hidden;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.hero-suggestion-box::-webkit-scrollbar {
+    width: 4px;
+}
+
+.hero-suggestion-box::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.hero-suggestion-box::-webkit-scrollbar-thumb {
+    background: #ccc;
+    border-radius: 4px;
+}
+
+.hero-suggestion-box .suggestion-item {
+    padding: 10px 18px;
+    font-size: 14px;
+    color: #1a1a1a;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: background 0.15s ease;
+}
+
+.hero-suggestion-box .suggestion-item:hover {
+    background: #f5f5f5;
+}
+
+.hero-suggestion-box .suggestion-item strong {
+    color: #77bfa4;
+    font-weight: 700;
+}
+
+.suggestion-sphere {
+    font-size: 11px;
+    color: #aaa;
+    font-weight: 400;
+    margin-left: 10px;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.suggestion-name {
+    display: flex;
+    align-items: center;
+    flex-shrink: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.suggestion-name strong {
+    color: #77bfa4;
+    font-weight: 700;
+    display: inline;
 }
 
 .hero-hint {

@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Репетиторы | Repet+</title>
+    <link rel="stylesheet" href="styleMain.css">
+    <link rel="stylesheet" href="repets.css">
+</head>
+<body>
+    <header class="header">
+        <div class="header-inner">
+            <a href="indexMain.html"><div class="logo">
+                <div class="logo-icon">
+                    <img src="images/Frame 20.png">
+                </div>
+            </div></a>
+            <div class="tutors-header-search">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+                <input type="text" placeholder="Поиск">
+            </div>
+            <div class="header-nav">
+                <div class="dropdown" data-dropdown="city">
+                    <button class="dropdown-toggle">
+                        Ваш город
+                        <svg class="chevron" width="12" height="12" viewBox="0 0 12 12"><path d="M3 4.5l3 3 3-3" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg>
+                    </button>
+                    <div class="dropdown-menu">
+                        <a href="#">Москва</a>
+                        <a href="#">Санкт-Петербург</a>
+                        <a href="#">Новосибирск</a>
+                        <a href="#">Екатеринбург</a>
+                        <a href="#">Казань</a>
+                        <a href="#">Нижний Новгород</a>
+                    </div>
+                </div>
+            </div>
+            <button class="profile-btn">
+                Профиль
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                    <circle cx="12" cy="7" r="4"/>
+                </svg>
+            </button>
+        </div>
+    </header>
+
+    <main class="tutors-main">
+        <div class="tutors-container">
+            <div class="filters-row filters-row-top">
+                <div class="filter-group">
+                    <label class="filter-label">Предмет</label>
+                    <div class="filter-input-wrap">
+                        <input type="text" class="filter-input" value="Английский язык">
+                    </div>
+                </div>
+                <div class="filter-group">
+                    <label class="filter-label">Стоимость урока</label>
+                    <div class="filter-input-wrap">
+                        <input type="text" class="filter-input" value="2000-3000 рублей">
+                    </div>
+                </div>
+                <div class="filter-group">
+                    <label class="filter-label">Время проведения</label>
+                    <div class="filter-input-wrap">
+                        <input type="text" class="filter-input" value="Любое время">
+                    </div>
+                </div>
+            </div>
+            <div class="filters-row filters-row-bottom">
+                <div class="filter-group">
+                    <label class="filter-label">Опыт работы</label>
+                    <div class="filter-input-wrap">
+                        <input type="text" class="filter-input" value="10 лет">
+                    </div>
+                </div>
+                <div class="filter-group">
+                    <label class="filter-label">Уровень знания</label>
+                    <div class="filter-input-wrap">
+                        <input type="text" class="filter-input" value="C1+">
+                    </div>
+                </div>
+                <div class="filter-group">
+                    <label class="filter-label">Год рождения</label>
+                    <div class="filter-input-wrap">
+                        <input type="text" class="filter-input" value="23-32">
+                    </div>
+                </div>
+                <div class="filter-group">
+                    <label class="filter-label">Форма обучения</label>
+                    <div class="filter-input-wrap">
+                        <input type="text" class="filter-input" value="B2">
+                    </div>
+                </div>
+            </div>
+
+            <h2 class="tutors-found">Найдено 1383 репетитора по Английскому языку</h2>
+
+            <div class="tutors-list">
+
+                <div class="tutor-card-item">
+                    <div class="tutor-card-img"><img src="images/image 15.png"></div>
+                    <div class="tutor-card-info">
+                        <div class="tutor-card-header">
+                            <span class="tutor-name">Анна К.</span>
+                        </div>
+                        <div class="tutor-badges">
+                                <span class="badge badge-teal">Ведущий специалист</span>
+                                <span class="badge badge-purple">Рекомендованный репетитор</span>
+                            </div>
+                        <div class="tutor-subject">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" stroke="#999"><g id="_01_align_center" data-name="01 align center"><path d="M20,0H5A3,3,0,0,0,2,3V21a3,3,0,0,0,3,3H22V2A2,2,0,0,0,20,0Zm0,18H8V2H20ZM5,2H6V18H5.017A3,3,0,0,0,4,18.187V3A1,1,0,0,1,5,2ZM5,22a1,1,0,0,1-1-.992h.015a1,1,0,0,1,1-1.008H20v2Z"/></g></svg>
+                            Английский язык
+                        </div>
+                        <div class="tutor-languages">Языки: Английский язык (C2), Русский язык (Родной)</div>
+                        <div class="tutor-desc">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+                            Привет! Я Анна, и я могу научить тебя английскому с нуля до B1-B2 или помочь достичь С1-С2. Я всегда за хорошую и добрую атмосферу, поэтому всегда выслушаю тебя и помогу построить речь
+                        </div>
+                        <a href="#" class="tutor-more">Узнать больше</a>
+                    </div>
+                    <div class="tutor-card-right">
+                        <div class="tutor-card-price-row">
+                            <span class="tutor-price">3400 рублей</span>
+                            <button class="tutor-favorite">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ccc" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                            </button>
+                        </div>
+                        <div class="tutor-price-desc">За один урок 60 минут</div>
+                        <div class="tutor-stats">
+                            <div class="tutor-stat">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="#f5a623" stroke="none"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                                4.9
+                            </div>
+                            <div class="tutor-stat">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                                16 учеников
+                            </div>
+                            <div class="tutor-stat">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                                1348 уроков
+                            </div>
+                        </div>
+                        <div class="tutor-reviews">1+ тыс. положительных отзывов</div>
+                        <button class="book-btn">Забронировать пробный урок</button>
+                        <button class="message-btn">Написать сообщение</button>
+                    </div>
+                </div>
+
+                <div class="tutor-card-item">
+                    <div class="tutor-card-img"><img src="images/image 16.png"></div>
+                    <div class="tutor-card-info">
+                        <div class="tutor-card-header">
+                            <span class="tutor-name">Сергей П.</span>
+                            <div class="tutor-badges">
+                                <span class="badge badge-blue">Профессионал</span>
+                                <span class="badge badge-purple">Рекомендованный репетитор</span>
+                            </div>
+                        </div>
+                        <div class="tutor-subject">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+                            Английский язык
+                        </div>
+                        <div class="tutor-languages">Языки: Английский язык (C1), Испанский язык (C2), Русский язык (Родной)</div>
+                        <div class="tutor-desc">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+                            Я Сергей, и я могу обучить тебя английскому и испанскому с нуля до B1-B2. Я всегда за хорошую и добрую атмосферу, поэтому всегда выслушаю тебя и помогу построить речь
+                        </div>
+                        <a href="#" class="tutor-more">Узнать больше</a>
+                    </div>
+                    <div class="tutor-card-right">
+                        <div class="tutor-card-price-row">
+                            <span class="tutor-price">3000 рублей</span>
+                            <button class="tutor-favorite">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ccc" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                            </button>
+                        </div>
+                        <div class="tutor-price-desc">За один урок 60 минут</div>
+                        <div class="tutor-stats">
+                            <div class="tutor-stat">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="#f5a623" stroke="none"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                                4.8
+                            </div>
+                            <div class="tutor-stat">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                                19 учеников
+                            </div>
+                            <div class="tutor-stat">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                                1144 уроков
+                            </div>
+                        </div>
+                        <div class="tutor-reviews">1+ тыс. положительных отзывов</div>
+                        <button class="book-btn">Забронировать пробный урок</button>
+                        <button class="message-btn">Написать сообщение</button>
+                    </div>
+                </div>
+
+                <div class="tutor-card-item">
+                    <div class="tutor-card-img"><img src="images/image 17.png"></div>
+                    <div class="tutor-card-info">
+                        <div class="tutor-card-header">
+                            <span class="tutor-name">Анна К.</span>
+                            <div class="tutor-badges">
+                                <span class="badge badge-blue">Профессионал</span>
+                            </div>
+                        </div>
+                        <div class="tutor-subject">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+                            Английский язык
+                        </div>
+                        <div class="tutor-languages">Языки: Английский язык (C2), Русский язык (Родной)</div>
+                        <div class="tutor-desc">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+                            Привет! Я Анна, и я могу научить тебя английскому с нуля до B1-B2 или помочь достичь С1-С2. Я всегда за хорошую и добрую атмосферу, поэтому всегда выслушаю тебя и помогу построить речь
+                        </div>
+                        <a href="#" class="tutor-more">Узнать больше</a>
+                    </div>
+                    <div class="tutor-card-right">
+                        <div class="tutor-card-price-row">
+                            <span class="tutor-price">3400 рублей</span>
+                            <button class="tutor-favorite">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ccc" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                            </button>
+                        </div>
+                        <div class="tutor-price-desc">За один урок 60 минут</div>
+                        <div class="tutor-stats">
+                            <div class="tutor-stat">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="#f5a623" stroke="none"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                                4.9
+                            </div>
+                            <div class="tutor-stat">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                                16 учеников
+                            </div>
+                            <div class="tutor-stat">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                                1348 уроков
+                            </div>
+                        </div>
+                        <div class="tutor-reviews">1+ тыс. положительных отзывов</div>
+                        <button class="book-btn">Забронировать пробный урок</button>
+                        <button class="message-btn">Написать сообщение</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-inner">
+            <div class="footer-logo">
+                <div class="logo">
+                <div class="logo-icon">
+                    <img src="images/Frame 20.png">
+                </div>
+            </div>
+            </div>
+            <div class="footer-divider"></div>
+            <div class="footer-columns">
+                <div class="footer-col">
+                    <h4>Контактная информация</h4>
+                    <p>Москва, Мосфильмовская<br>ул, д. 27, помещ. 1/п</p>
+                    <p>+7(426)234-67-25</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Ученикам</h4>
+                    <a href="#">Найти репетитора</a>
+                    <a href="#">Материалы</a>
+                </div>
+                <div class="footer-col">
+                    <h4>О компании</h4>
+                    <a href="#">Работа у нас</a>
+                    <a href="#">Партнерская программа</a>
+                    <a href="#">Информация</a>
+                </div>
+                <div class="footer-col">
+                    <h4>Репетиторам</h4>
+                    <a href="#">Личный кабинет</a>
+                    <a href="#">Отправить заявку</a>
+                    <a href="#">Условие сотрудничества</a>
+                </div>
+            </div>
+            <div class="footer-social">
+                <h4>Социальные сети</h4>
+                <div class="social-icons">
+                    <a href="#" class="social-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.2-.08-.06-.19-.04-.27-.02-.12.03-1.99 1.27-5.62 3.72-.53.36-1.01.54-1.44.53-.47-.01-1.38-.27-2.06-.49-.83-.27-1.49-.42-1.43-.88.03-.24.37-.49 1.02-.74 3.99-1.74 6.65-2.89 7.99-3.45 3.8-1.6 4.59-1.88 5.1-1.89.11 0 .37.03.54.17.14.12.18.28.2.45-.01.06.01.24 0 .37z"/></svg>
+                    </a>
+                    <a href="#" class="social-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                    </a>
+                    <a href="#" class="social-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1v-3.5a6.37 6.37 0 0 0-.79-.05A6.34 6.34 0 0 0 3.15 15a6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.34-6.34V8.1a8.16 8.16 0 0 0 4.76 1.52v-3.4a4.85 4.85 0 0 1-1-.47z"/></svg>
+                    </a>
+                </div>
+            </div>
+            <div class="footer-divider"></div>
+            <div class="footer-copyright">
+                <p>© 2026, Сервис подбора репетиторов REPET+</p>
+                <p>ООО «НАЙДИ РЕПЕТИТОРА», ОГРН 676922842</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="repets.js"></script>
+</body>
+</html>

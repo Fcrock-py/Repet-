@@ -1,3 +1,104 @@
+var heroSearchInput = document.querySelector('.hero-search input');
+
+if (heroSearchInput) {
+    var heroBox = document.createElement('div');
+    heroBox.classList.add('hero-suggestion-box');
+    heroSearchInput.parentElement.appendChild(heroBox);
+
+    var heroDebounce = null;
+
+    function closeHeroBox() {
+        heroBox.innerHTML = '';
+        heroBox.style.display = 'none';
+    }
+
+    heroSearchInput.addEventListener('input', function() {
+        var query = this.value.trim();
+
+        clearTimeout(heroDebounce);
+
+        if (!query) {
+            closeHeroBox();
+            return;
+        }
+
+        heroDebounce = setTimeout(function() {
+            fetch(API + '/subjects/search-all?q=' + encodeURIComponent(query))
+            .then(function(response) {
+                return response.json();
+            })
+            .then(function(data) {
+                heroBox.innerHTML = '';
+
+                if (data.length === 0) {
+                    heroBox.style.display = 'none';
+                    return;
+                }
+
+                heroBox.style.display = 'flex';
+
+                data.forEach(function(subject) {
+                    var item = document.createElement('div');
+                    item.classList.add('suggestion-item');
+
+                    var nameSpan = document.createElement('span');
+                    nameSpan.classList.add('suggestion-name');
+
+                    var queryLower = query.toLowerCase();
+                    var nameLower = subject.name.toLowerCase();
+                    var index = nameLower.indexOf(queryLower);
+
+                    if (index !== -1) {
+                        var before = subject.name.slice(0, index);
+                        var match = subject.name.slice(index, index + query.length);
+                        var after = subject.name.slice(index + query.length);
+                        nameSpan.innerHTML = before + '<strong>' + match + '</strong>' + after;
+                    } else {
+                        nameSpan.textContent = subject.name;
+                    }
+
+                    var sphereNames = {
+                        'school': 'Школьные предметы',
+                        'music': 'Музыка',
+                        'languages': 'Иностранные языки',
+                        'higher': 'Высшее образование',
+                        'other': 'Другие репетиторы'
+                    };
+
+                    var sphereLabel = document.createElement('span');
+                    sphereLabel.classList.add('suggestion-sphere');
+                    sphereLabel.textContent = sphereNames[subject.sphere] || subject.sphere;
+
+                    item.appendChild(nameSpan);
+                    item.appendChild(sphereLabel);
+
+                    item.addEventListener('click', function() {
+                        heroSearchInput.value = subject.name;
+                        closeHeroBox();
+                    });
+
+                    heroBox.appendChild(item);
+                });
+            })
+            .catch(function(error) {
+                console.error('Ошибка поиска:', error);
+            });
+        }, 250);
+    });
+
+    document.addEventListener('click', function(e) {
+        if (!heroSearchInput.parentElement.contains(e.target)) {
+            closeHeroBox();
+        }
+    });
+
+    heroSearchInput.addEventListener('focus', function() {
+        if (this.value.trim() && heroBox.children.length > 0) {
+            heroBox.style.display = 'flex';
+        }
+    });
+}
+
 document.querySelectorAll('.dropdown-toggle').forEach(function(btn) {
     btn.addEventListener('click', function(e) {
         e.stopPropagation();

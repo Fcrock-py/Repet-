@@ -1,0 +1,321 @@
+.tutors-header-search {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: #fff;
+    border: 1.5px solid #ddd;
+    border-radius: 24px;
+    padding: 9px 18px;
+    flex: 1;
+    max-width: 800px;
+    margin: 0 20px;
+    transition: border-color 0.2s ease;
+}
+
+.tutors-header-search:focus-within {
+    border-color: #aaa;
+}
+
+.tutors-header-search input {
+    border: none;
+    outline: none;
+    font-size: 14px;
+    flex: 1;
+    background: transparent;
+}
+
+.profile-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    border: 1.5px solid #ccc;
+    border-radius: 24px;
+    background: #fff;
+    font-size: 14px;
+    color: #1a1a1a;
+    transition: all 0.2s ease;
+}
+
+.profile-btn:hover {
+    border-color: #999;
+    transform: scale(1.03);
+}
+
+.tutors-main {
+    padding: 30px 0 100px;
+}
+
+.tutors-container {
+    max-width: 1520px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.filters-row {
+    display: flex;
+    gap: 40px;
+    margin-bottom: 30px;
+}
+
+.filters-row-top .filter-group {
+    flex: 1;
+}
+
+.filters-row-bottom .filter-group {
+    flex: 1;
+}
+
+.filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    background-color: white;
+    border-radius: 14px;
+    padding: 20px 30px;
+}
+
+.filter-label {
+    font-size: 14px;
+    color: #aaa;
+    font-weight: 500;
+}
+
+.filter-input-wrap {
+    display: flex;
+    align-items: center;
+    background: #fff;
+}
+
+.filter-input {
+    border: none;
+    outline: none;
+    font-size: 17px;
+    font-weight: 700;
+    color: #1a1a1a;
+    width: 100%;
+    background: transparent;
+}
+
+.tutors-found {
+    font-size: 22px;
+    font-weight: 800;
+    margin: 24px 0 20px;
+}
+
+.tutors-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.tutor-card-item {
+    background: #fff;
+    border-radius: 16px;
+    padding: 60px;
+    display: flex;
+    gap: 50px;
+    transition: box-shadow 0.2s ease;
+}
+
+.tutor-card-item:hover {
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.tutor-card-img {
+    width: 270px;
+    height: 270px;
+    background: #ddd;
+    border-radius: 12px;
+    flex-shrink: 0;
+}
+
+.tutor-card-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.tutor-card-header {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.tutor-name {
+    font-size: 26px;
+    font-weight: 800;
+}
+
+.tutor-badges {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-top: 10px;
+}
+
+.badge {
+    padding: 5px 13px;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.badge-teal {
+    background: #c0f5d8;
+    color: #2a7a50;
+}
+
+.badge-purple {
+    background: #e8d8f8;
+    color: #6a2a9a;
+}
+
+.badge-blue {
+    background: #d0e8f8;
+    color: #1a5a8a;
+}
+
+.tutor-subject {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 17px;
+    font-weight: 700;
+    color: #333;
+    margin-top: 20px;
+}
+
+.tutor-languages {
+    font-size: 17px;
+    color: #888;
+    margin-top: 10px;
+}
+
+.tutor-desc {
+    display: flex;
+    align-items: flex-start;
+    gap: 6px;
+    font-size: 17px;
+    font-weight: 700;
+    line-height: 1.5;
+    margin-top: 20px;
+}
+
+.tutor-desc svg {
+    flex-shrink: 0;
+    margin-top: 6px;
+}
+
+.tutor-more {
+    font-size: 17px;
+    color: #888;
+    text-decoration: underline;
+    transition: color 0.2s ease;
+    margin: 10px 0 0 20px
+}
+
+.tutor-more:hover {
+    color: #555;
+}
+
+.tutor-card-right {
+    width: 400px;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.tutor-card-price-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.tutor-price {
+    font-size: 18px;
+    font-weight: 800;
+}
+
+.tutor-favorite {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+    display: flex;
+    align-items: center;
+    transition: transform 0.2s ease;
+}
+
+.tutor-favorite:hover {
+    transform: scale(1.2);
+}
+
+.tutor-favorite:hover svg {
+    stroke: #e05555;
+}
+
+.tutor-price-desc {
+    font-size: 11px;
+    color: #aaa;
+}
+
+.tutor-stats {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-top: 4px;
+}
+
+.tutor-stat {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 12px;
+    color: #555;
+    font-weight: 600;
+}
+
+.tutor-reviews {
+    font-size: 11px;
+    color: #aaa;
+    margin-bottom: 6px;
+}
+
+.book-btn {
+    padding: 10px 16px;
+    background: #77bfa4;
+    color: #fff;
+    border: none;
+    border-radius: 24px;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-align: center;
+}
+
+.book-btn:hover {
+    background: #69ae95;
+    transform: scale(1.03);
+}
+
+.message-btn {
+    padding: 10px 16px;
+    background: #fff;
+    color: #1a1a1a;
+    border: 1.5px solid #ddd;
+    border-radius: 24px;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-align: center;
+}
+
+.message-btn:hover {
+    border-color: #aaa;
+    transform: scale(1.03);
+}

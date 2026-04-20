@@ -83,6 +83,30 @@ def validate_application(data: ApplicationIn):
 def root():
     return {"message": "Server is running"}
 
+@app.get("/subjects/search-all", response_model=list[SubjectOut])
+def search_all_subjects(
+    q: str = Query(default=""),
+    db: Session = Depends(get_db)
+):
+    all_subjects = db.query(Subject).all()
+
+    if q.strip():
+        search_term = q.strip().lower()
+
+        result = [
+            s for s in all_subjects
+            if search_term in s.name.lower()
+        ]
+
+        result.sort(key=lambda s: (
+            not s.name.lower().startswith(search_term),
+            s.name.lower()
+        ))
+
+        return result
+
+    return all_subjects
+
 @app.post("/applications", response_model=ApplicationOut)
 def create_application(data: ApplicationIn, db: Session = Depends(get_db)):
     errors = validate_application(data)
