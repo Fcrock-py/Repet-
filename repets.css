@@ -12,6 +12,27 @@
     transition: border-color 0.2s ease;
 }
 
+.input-suffix {
+    font-size: 14px;
+    font-weight: 600;
+    color: #555;
+    margin-left: 4px;
+    white-space: nowrap;
+    display: none;
+    align-items: center;
+}
+
+.tutors-empty {
+    text-align: center;
+    padding: 40px;
+    font-size: 16px;
+    color: #aaa;
+}
+
+.filter-input-wrap {
+    position: relative;
+}
+
 .tutors-header-search:focus-within {
     border-color: #aaa;
 }
@@ -91,7 +112,7 @@
     border: none;
     outline: none;
     font-size: 17px;
-    font-weight: 700;
+    font-weight: 600;
     color: #1a1a1a;
     width: 100%;
     background: transparent;
@@ -100,13 +121,13 @@
 .tutors-found {
     font-size: 22px;
     font-weight: 800;
-    margin: 24px 0 20px;
+    margin: 30px 0 30px;
 }
 
 .tutors-list {
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: 30px;
 }
 
 .tutor-card-item {
@@ -144,8 +165,8 @@
 }
 
 .tutor-name {
-    font-size: 26px;
-    font-weight: 800;
+    font-size: 40px;
+    font-weight: 700;
 }
 
 .tutor-badges {
@@ -225,7 +246,6 @@
     flex-shrink: 0;
     display: flex;
     flex-direction: column;
-    gap: 6px;
 }
 
 .tutor-card-price-row {
@@ -235,8 +255,8 @@
 }
 
 .tutor-price {
-    font-size: 18px;
-    font-weight: 800;
+    font-size: 40px;
+    font-weight: 700;
 }
 
 .tutor-favorite {
@@ -258,39 +278,41 @@
 }
 
 .tutor-price-desc {
-    font-size: 11px;
+    margin-top: 10px;
+    font-size: 16px;
     color: #aaa;
 }
 
 .tutor-stats {
     display: flex;
-    gap: 10px;
+    justify-content: space-between;
     flex-wrap: wrap;
-    margin-top: 4px;
+    margin-top: 30px;
 }
 
 .tutor-stat {
     display: flex;
     align-items: center;
-    gap: 4px;
-    font-size: 12px;
+    gap: 10px;
+    font-size: 17px;
     color: #555;
     font-weight: 600;
 }
 
 .tutor-reviews {
-    font-size: 11px;
+    font-size: 17px;
     color: #aaa;
-    margin-bottom: 6px;
+    margin-top: 10px;
 }
 
 .book-btn {
+    margin-top: 20px;
     padding: 10px 16px;
     background: #77bfa4;
     color: #fff;
     border: none;
     border-radius: 24px;
-    font-size: 13px;
+    font-size: 17px;
     font-weight: 700;
     cursor: pointer;
     transition: all 0.2s ease;
@@ -303,12 +325,13 @@
 }
 
 .message-btn {
+    margin-top: 20px;
     padding: 10px 16px;
     background: #fff;
     color: #1a1a1a;
     border: 1.5px solid #ddd;
     border-radius: 24px;
-    font-size: 13px;
+    font-size: 17px;
     font-weight: 700;
     cursor: pointer;
     transition: all 0.2s ease;

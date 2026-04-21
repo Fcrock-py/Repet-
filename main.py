@@ -3,12 +3,13 @@ from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
 from sqlalchemy import func, event
 from sqlalchemy.engine import Engine
+from typing import Optional
 import sqlite3
 import re
 
 from database import SessionLocal, engine, Base
-from models import Subject, Application
-from schemas import SubjectOut, ApplicationIn, ApplicationOut
+from models import Subject, Application, Tutor
+from schemas import SubjectOut, ApplicationIn, ApplicationOut, TutorOut
 
 Base.metadata.create_all(bind=engine)
 
@@ -50,70 +51,37 @@ VALID_SUBJECTS = [
 
 def validate_application(data: ApplicationIn):
     errors = {}
-
     if not data.full_name.strip():
         errors['full_name'] = 'Введите ФИО'
     elif re.search(r'\d', data.full_name):
         errors['full_name'] = 'ФИО не должно содержать цифры'
     elif len(data.full_name.strip().split()) < 2:
         errors['full_name'] = 'Введите полное ФИО'
-
     if data.gender not in ['М', 'Ж']:
         errors['gender'] = 'Укажите пол'
-
     if data.age < 18 or data.age > 99:
         errors['age'] = 'Возраст должен быть от 18 до 99 лет'
-
     if not re.match(r'^[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$', data.email):
         errors['email'] = 'Некорректная электронная почта'
-
     if not re.match(r'^\+7\(\d{3}\)\d{3}-\d{2}-\d{2}$', data.phone):
         errors['phone'] = 'Формат телефона: +7(000)000-00-00'
-
     if not data.subject.strip():
         errors['subject'] = 'Введите предмет'
     elif re.search(r'\d', data.subject):
         errors['subject'] = 'Предмет не должен содержать цифры'
     elif data.subject.strip().lower() not in VALID_SUBJECTS:
         errors['subject'] = 'Укажите настоящий предмет из нашего списка'
-
     return errors
 
 @app.get("/")
 def root():
     return {"message": "Server is running"}
 
-@app.get("/subjects/search-all", response_model=list[SubjectOut])
-def search_all_subjects(
-    q: str = Query(default=""),
-    db: Session = Depends(get_db)
-):
-    all_subjects = db.query(Subject).all()
-
-    if q.strip():
-        search_term = q.strip().lower()
-
-        result = [
-            s for s in all_subjects
-            if search_term in s.name.lower()
-        ]
-
-        result.sort(key=lambda s: (
-            not s.name.lower().startswith(search_term),
-            s.name.lower()
-        ))
-
-        return result
-
-    return all_subjects
-
 @app.post("/applications", response_model=ApplicationOut)
 def create_application(data: ApplicationIn, db: Session = Depends(get_db)):
     errors = validate_application(data)
-
     if errors:
         raise HTTPException(status_code=422, detail=errors)
-
     application = Application(
         full_name=data.full_name.strip(),
         gender=data.gender,
@@ -122,23 +90,14 @@ def create_application(data: ApplicationIn, db: Session = Depends(get_db)):
         phone=data.phone.strip(),
         subject=data.subject.strip()
     )
-
     db.add(application)
     db.commit()
     db.refresh(application)
-
     return application
 
 @app.get("/applications", response_model=list[ApplicationOut])
 def get_applications(db: Session = Depends(get_db)):
     return db.query(Application).order_by(Application.id.desc()).all()
-
-@app.get("/applications/{application_id}", response_model=ApplicationOut)
-def get_application(application_id: int, db: Session = Depends(get_db)):
-    application = db.query(Application).filter(Application.id == application_id).first()
-    if not application:
-        raise HTTPException(status_code=404, detail="Заявка не найдена")
-    return application
 
 @app.delete("/applications/{application_id}")
 def delete_application(application_id: int, db: Session = Depends(get_db)):
@@ -150,34 +109,90 @@ def delete_application(application_id: int, db: Session = Depends(get_db)):
     return {"message": "Заявка удалена"}
 
 @app.get("/subjects/search", response_model=list[SubjectOut])
-def search_subjects(
-    q: str = Query(default=""),
-    sphere: str = Query(...),
-    db: Session = Depends(get_db)
-):
+def search_subjects(q: str = Query(default=""), sphere: str = Query(...), db: Session = Depends(get_db)):
     query = db.query(Subject).filter(Subject.sphere == sphere)
-
     if q.strip():
         search_term = q.strip().lower()
         all_subjects = query.all()
-
-        result = [
-            s for s in all_subjects
-            if search_term in s.name.lower()
-        ]
-
-        result.sort(key=lambda s: (
-            not s.name.lower().startswith(search_term),
-            s.name.lower()
-        ))
-
+        result = [s for s in all_subjects if search_term in s.name.lower()]
+        result.sort(key=lambda s: (not s.name.lower().startswith(search_term), s.name.lower()))
         return result
-
     return query.order_by(Subject.name.asc()).all()
 
+@app.get("/subjects/search-all", response_model=list[SubjectOut])
+def search_all_subjects(q: str = Query(default=""), db: Session = Depends(get_db)):
+    all_subjects = db.query(Subject).all()
+    if q.strip():
+        search_term = q.strip().lower()
+        result = [s for s in all_subjects if search_term in s.name.lower()]
+        result.sort(key=lambda s: (not s.name.lower().startswith(search_term), s.name.lower()))
+        return result
+    return all_subjects
+
 @app.get("/subjects/by-sphere", response_model=list[SubjectOut])
-def get_subjects_by_sphere(
-    sphere: str = Query(...),
+def get_subjects_by_sphere(sphere: str = Query(...), db: Session = Depends(get_db)):
+    return db.query(Subject).filter(Subject.sphere == sphere).order_by(Subject.name.asc()).all()
+
+@app.get("/tutors/search-name")
+def search_tutor_name(q: str = Query(default=""), db: Session = Depends(get_db)):
+    all_tutors = db.query(Tutor).all()
+    if q.strip():
+        search_term = q.strip().lower()
+        result = [t for t in all_tutors if search_term in t.name.lower()]
+        result.sort(key=lambda t: (not t.name.lower().startswith(search_term), t.name.lower()))
+        return [{"id": t.id, "name": t.name, "subject": t.subject} for t in result]
+    return []
+
+@app.get("/tutors", response_model=list[TutorOut])
+def get_tutors(
+    name: Optional[str] = Query(default=None),
+    subject: Optional[str] = Query(default=None),
+    price_from: Optional[int] = Query(default=None),
+    price_to: Optional[int] = Query(default=None),
+    schedule: Optional[str] = Query(default=None),
+    experience: Optional[int] = Query(default=None),
+    level: Optional[str] = Query(default=None),
+    birth_year_from: Optional[int] = Query(default=None),
+    birth_year_to: Optional[int] = Query(default=None),
+    goal: Optional[str] = Query(default=None),
     db: Session = Depends(get_db)
 ):
-    return db.query(Subject).filter(Subject.sphere == sphere).order_by(Subject.name.asc()).all()
+    all_tutors = db.query(Tutor).all()
+    result = all_tutors
+
+    if name and name.strip():
+        term = name.strip().lower()
+        result = [t for t in result if term in t.name.lower()]
+
+    if subject and subject.strip():
+        term = subject.strip().lower()
+        result = [t for t in result if term in t.subject.lower()]
+
+    if price_from is not None:
+        result = [t for t in result if t.price >= price_from]
+
+    if price_to is not None:
+        result = [t for t in result if t.price <= price_to]
+
+    if schedule and schedule.strip() and schedule.strip() != "в любое время":
+        term = schedule.strip().lower()
+        result = [t for t in result if term in t.schedule.lower()]
+
+    if experience is not None:
+        result = [t for t in result if t.experience >= experience]
+
+    if level and level.strip():
+        term = level.strip().lower()
+        result = [t for t in result if term in t.level.lower()]
+
+    if birth_year_from is not None:
+        result = [t for t in result if t.birth_year >= birth_year_from]
+
+    if birth_year_to is not None:
+        result = [t for t in result if t.birth_year <= birth_year_to]
+
+    if goal and goal.strip():
+        term = goal.strip().lower()
+        result = [t for t in result if term in t.goal.lower()]
+
+    return result
