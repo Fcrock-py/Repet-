@@ -45,6 +45,7 @@ class TutorOut(BaseModel):
     description: str
     languages: str
     badge: str
+    image_url: str
     class Config:
         from_attributes = True
 

@@ -12,16 +12,6 @@
     transition: border-color 0.2s ease;
 }
 
-.input-suffix {
-    font-size: 14px;
-    font-weight: 600;
-    color: #555;
-    margin-left: 4px;
-    white-space: nowrap;
-    display: none;
-    align-items: center;
-}
-
 .tutors-empty {
     text-align: center;
     padding: 40px;
@@ -116,6 +106,18 @@
     color: #1a1a1a;
     width: 100%;
     background: transparent;
+}
+
+.input-suffix {
+    font-size: 16px;
+    font-weight: 600;
+    color: #555;
+    margin-left: 23px;
+    margin-top: 4px;
+    white-space: nowrap;
+    display: flex;
+    position: absolute;
+    align-items: end;
 }
 
 .tutors-found {

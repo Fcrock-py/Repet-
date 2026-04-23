@@ -36,3 +36,4 @@ class Tutor(Base):
     description = Column(String, nullable=False)
     languages = Column(String, nullable=False)
     badge = Column(String, nullable=False)
+    image_url = Column(String, nullable=False, default="")

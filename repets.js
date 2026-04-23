@@ -58,9 +58,13 @@ function renderTutors(tutors) {
     tutors.forEach(function(t) {
         var card = document.createElement('div');
         card.classList.add('tutor-card-item');
+        
+        var imgHTML = t.image_url
+            ? '<img src="' + t.image_url + '" class="tutor-card-img" alt="' + t.name + '">'
+            : '<div class="tutor-card-img tutor-card-img-placeholder"></div>';
 
-        card.innerHTML = '\
-            <div class="tutor-card-img"></div>\
+         card.innerHTML = '\
+            ' + imgHTML + '\
             <div class="tutor-card-info">\
                 <div class="tutor-card-header">\
                     <span class="tutor-name">' + t.name + '</span>\

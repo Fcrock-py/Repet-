@@ -10,6 +10,7 @@ import re
 from database import SessionLocal, engine, Base
 from models import Subject, Application, Tutor
 from schemas import SubjectOut, ApplicationIn, ApplicationOut, TutorOut
+from fastapi.staticfiles import StaticFiles
 
 Base.metadata.create_all(bind=engine)
 
@@ -22,6 +23,8 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+app.mount("/images", StaticFiles(directory="images"), name="images")
 
 @event.listens_for(Engine, "connect")
 def set_sqlite_unicode(dbapi_connection, connection_record):
