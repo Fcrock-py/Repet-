@@ -1,5 +1,156 @@
 var API = 'http://127.0.0.1:8000';
 
+function readAndApplySessionFilters() {
+    var subject = sessionStorage.getItem('selected_subject') || sessionStorage.getItem('apply_subject');
+    var goal = sessionStorage.getItem('selected_goal') || sessionStorage.getItem('apply_goal');
+    var city = sessionStorage.getItem('selected_city') || sessionStorage.getItem('apply_city');
+
+    console.log('Читаем фильтры:', subject, goal, city);
+
+    if (subject) {
+        var subjectField = document.querySelector('.filter-input[data-filter="subject"]');
+        if (subjectField) {
+            subjectField.value = subject;
+            filters.subject = subject;
+        }
+        sessionStorage.removeItem('selected_subject');
+        sessionStorage.removeItem('apply_subject');
+    }
+
+    if (goal) {
+        var goalField = document.querySelector('.filter-input[data-filter="goal"]');
+        if (goalField) {
+            goalField.value = goal;
+            filters.goal = goal;
+        }
+        sessionStorage.removeItem('selected_goal');
+        sessionStorage.removeItem('apply_goal');
+    }
+
+    if (city) {
+        var cityBtn = document.querySelector('[data-dropdown="city"] .dropdown-toggle');
+        if (cityBtn) {
+            cityBtn.childNodes[0].textContent = city + ' ';
+        }
+        sessionStorage.removeItem('selected_city');
+        sessionStorage.removeItem('apply_city');
+    }
+}
+
+var profileBtn = document.getElementById('profileBtn');
+var profileMenu = document.getElementById('profileMenu');
+var favoritesActive = false;
+var favoritedCards = new Set();
+
+if (profileBtn && profileMenu) {
+    profileBtn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        var isVisible = profileMenu.classList.contains('profile-menu-visible');
+        if (isVisible) {
+            profileMenu.classList.remove('profile-menu-visible');
+            setTimeout(function() {
+                if (!profileMenu.classList.contains('profile-menu-visible')) {
+                    profileMenu.style.display = 'none';
+                }
+            }, 200);
+            profileBtn.classList.remove('profile-btn-active');
+        } else {
+            profileMenu.style.display = 'flex';
+            requestAnimationFrame(function() {
+                profileMenu.classList.add('profile-menu-visible');
+            });
+            profileBtn.classList.add('profile-btn-active');
+        }
+    });
+
+    document.addEventListener('click', function(e) {
+        if (!document.getElementById('profileDropdown').contains(e.target)) {
+            profileMenu.classList.remove('profile-menu-visible');
+            setTimeout(function() {
+                if (!profileMenu.classList.contains('profile-menu-visible')) {
+                    profileMenu.style.display = 'none';
+                }
+            }, 200);
+            profileBtn.classList.remove('profile-btn-active');
+        }
+    });
+}
+
+var favoritesBtn = document.getElementById('favoritesBtn');
+if (favoritesBtn) {
+    favoritesBtn.addEventListener('click', function() {
+        favoritesActive = !favoritesActive;
+        profileMenu.classList.remove('profile-menu-visible');
+        profileMenu.style.display = 'none';
+        profileBtn.classList.remove('profile-btn-active');
+
+        var list = document.querySelector('.tutors-list');
+        var found = document.querySelector('.tutors-found');
+
+        if (favoritesActive) {
+            this.style.color = '#e05555';
+            this.querySelector('svg').setAttribute('fill', '#e05555');
+            this.querySelector('svg').setAttribute('stroke', '#e05555');
+
+            var cards = list.querySelectorAll('.tutor-card-item');
+            var visibleCount = 0;
+
+            cards.forEach(function(card) {
+                var favSvg = card.querySelector('.tutor-favorite svg');
+                var isFav = favSvg && favSvg.getAttribute('fill') === '#e05555';
+                if (isFav) {
+                    card.style.display = 'flex';
+                    visibleCount++;
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+
+            if (found) found.textContent = 'Понравившихся репетиторов: ' + visibleCount;
+
+            if (visibleCount === 0) {
+                var empty = document.createElement('div');
+                empty.classList.add('tutors-empty');
+                empty.id = 'fav-empty';
+                empty.textContent = 'Вы ещё не добавили репетиторов в избранное';
+                list.appendChild(empty);
+            }
+
+        } else {
+            this.style.color = '';
+            this.querySelector('svg').setAttribute('fill', 'none');
+            this.querySelector('svg').setAttribute('stroke', 'currentColor');
+
+            var cards = list.querySelectorAll('.tutor-card-item');
+            cards.forEach(function(card) {
+                card.style.display = 'flex';
+            });
+
+            var empty = document.getElementById('fav-empty');
+            if (empty) empty.remove();
+
+            fetchTutors();
+        }
+    });
+}
+
+var applyBtn = document.getElementById('applyBtn');
+if (applyBtn) {
+    applyBtn.addEventListener('click', function() {
+        sessionStorage.setItem('scroll_to_apply', '1');
+        window.location.href = 'indexMain.html';
+    });
+}
+
+var logoutBtn = document.getElementById('logoutBtn');
+if (logoutBtn) {
+    logoutBtn.addEventListener('click', function() {
+        localStorage.removeItem('token');
+        localStorage.removeItem('user');
+        window.location.href = 'Auth.html';
+    });
+}
+
 var filters = {
     name: '',
     subject: '',
@@ -38,6 +189,81 @@ function getBadgeHTML(badge) {
         return '<span class="badge badge-blue">Профессионал</span><span class="badge badge-purple">Рекомендованный репетитор</span>';
     }
     return '';
+}
+
+function showBookingModal(tutorId, tutorName, requestType) {
+    var token = localStorage.getItem('token');
+
+    fetch(API + '/booking?tutor_id=' + tutorId + '&tutor_name=' + encodeURIComponent(tutorName) + '&request_type=' + encodeURIComponent(requestType), {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': token ? 'Bearer ' + token : ''
+        }
+    })
+    .then(function(r) { return r.json(); })
+    .catch(function(e) { console.error('Ошибка бронирования:', e); });
+
+    var overlay = document.createElement('div');
+    overlay.classList.add('booking-overlay');
+
+    var isLesson = requestType === 'lesson';
+
+    overlay.innerHTML = '\
+        <div class="booking-modal">\
+            <div class="booking-modal-icon">\
+                ' + (isLesson
+                    ? '<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#77bfa4" stroke-width="2.5"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><path d="M8 14l2 2 4-4"/></svg>'
+                    : '<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#5b6abf" stroke-width="2.5"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>'
+                ) + '\
+            </div>\
+            <div class="booking-modal-title">' + (isLesson ? 'Заявка отправлена!' : 'Сообщение отправлено!') + '</div>\
+            <div class="booking-modal-tutor">' + tutorName + '</div>\
+            <div class="booking-modal-type ' + (isLesson ? 'type-lesson' : 'type-message') + '">\
+                ' + (isLesson ? '📅 Пробный урок' : '💬 Сообщение репетитору') + '\
+            </div>\
+            <div class="booking-modal-text">\
+                ' + (isLesson
+                    ? 'Репетитор <strong>' + tutorName + '</strong> скоро с вами свяжется для согласования времени пробного урока!'
+                    : 'Ваше сообщение получено. Репетитор <strong>' + tutorName + '</strong> ответит вам в ближайшее время!'
+                ) + '\
+            </div>\
+            <button class="booking-modal-close">Отлично!</button>\
+        </div>\
+    ';
+
+    document.body.appendChild(overlay);
+
+    setTimeout(function() {
+        overlay.classList.add('booking-visible');
+    }, 10);
+
+    overlay.querySelector('.booking-modal-close').addEventListener('click', function() {
+        overlay.classList.remove('booking-visible');
+        setTimeout(function() { overlay.remove(); }, 300);
+    });
+
+    overlay.addEventListener('click', function(e) {
+        if (e.target === overlay) {
+            overlay.classList.remove('booking-visible');
+            setTimeout(function() { overlay.remove(); }, 300);
+        }
+    });
+}
+
+function loadMyBookings() {
+    var user = JSON.parse(localStorage.getItem('user') || 'null');
+    if (!user) return;
+
+    fetch(API + '/booking?user_id=' + user.id, {
+        headers: {
+            'Authorization': 'Bearer ' + (localStorage.getItem('token') || '')
+        }
+    })
+    .then(function(r) { return r.json(); })
+    .then(function(data) {
+        console.log('Мои заявки:', data);
+    });
 }
 
 function renderTutors(tutors) {
@@ -104,8 +330,8 @@ function renderTutors(tutors) {
                     </div>\
                 </div>\
                 <div class="tutor-reviews">' + t.reviews + '</div>\
-                <button class="book-btn">Забронировать пробный урок</button>\
-                <button class="message-btn">Написать сообщение</button>\
+                <button class="book-btn" data-tutor-id="' + t.id + '" data-tutor-name="' + t.name + '" data-type="lesson">Забронировать пробный урок</button>\
+                <button class="message-btn" data-tutor-id="' + t.id + '" data-tutor-name="' + t.name + '" data-type="message">Написать сообщение</button>\
             </div>\
         ';
 
@@ -125,6 +351,14 @@ function renderTutors(tutors) {
             });
         }
 
+        card.querySelectorAll('.book-btn, .message-btn').forEach(function(btn) {
+            btn.addEventListener('click', function() {
+            var tutorId = parseInt(this.getAttribute('data-tutor-id'));
+            var tutorName = this.getAttribute('data-tutor-name');
+            var requestType = this.getAttribute('data-type');
+            showBookingModal(tutorId, tutorName, requestType);
+            });
+        });
         list.appendChild(card);
     });
 }
@@ -483,4 +717,8 @@ document.addEventListener('click', function(e) {
     }
 });
 
-fetchTutors();
+document.addEventListener('DOMContentLoaded', function() {
+    readAndApplySessionFilters();
+    fetchTutors();
+    loadMyBookings();
+});

@@ -80,7 +80,7 @@ tutors = [
         description="Обучаю игре на гитаре с нуля. Классика, рок, поп — любой стиль. Занятия в удобном для тебя темпе",
         languages="Русский язык (Родной)",
         badge="pro",
-        image_url="http://127.0.0.1:8000/images/image%2016.png"
+        image_url="http://127.0.0.1:8000/images/image%2018.png"
     ),
     Tutor(
         name="Елена С.",
@@ -99,7 +99,7 @@ tutors = [
         description="Помогу улучшить грамотность, подготовиться к ЕГЭ и ОГЭ по русскому языку. Опыт работы более 12 лет",
         languages="Русский язык (Родной)",
         badge="leading",
-        image_url="http://127.0.0.1:8000/images/image%2016.png"
+        image_url="http://127.0.0.1:8000/images/image%2020.png"
     ),
     Tutor(
         name="Дмитрий К.",
@@ -118,7 +118,7 @@ tutors = [
         description="Обучаю программированию на Python, JavaScript. Помогу освоить с нуля или углубить знания",
         languages="Русский язык (Родной), Английский язык (B2)",
         badge="pro",
-        image_url="http://127.0.0.1:5500/images/image 16.png"
+        image_url="http://127.0.0.1:5500/images/image%2019.png"
     ),
 ]
 

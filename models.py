@@ -37,3 +37,20 @@ class Tutor(Base):
     languages = Column(String, nullable=False)
     badge = Column(String, nullable=False)
     image_url = Column(String, nullable=False, default="")
+class User(Base):
+    __tablename__ = "users"
+    id = Column(Integer, primary_key=True, index=True)
+    email = Column(String, nullable=True, unique=True, index=True)
+    phone = Column(String, nullable=True, unique=True, index=True)
+    password_hash = Column(String, nullable=False)
+
+class BookingRequest(Base):
+    __tablename__ = "booking_requests"
+    id = Column(Integer, primary_key=True, index=True)
+    tutor_id = Column(Integer, nullable=False)
+    tutor_name = Column(String, nullable=False)
+    user_id = Column(Integer, nullable=True)
+    user_email = Column(String, nullable=True)
+    user_phone = Column(String, nullable=True)
+    request_type = Column(String, nullable=False)
+    created_at = Column(String, nullable=False)

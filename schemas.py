@@ -60,3 +60,37 @@ class TutorSearchParams(BaseModel):
     birth_year_from: Optional[int] = None
     birth_year_to: Optional[int] = None
     goal: Optional[str] = None
+
+class RegisterIn(BaseModel):
+    email: Optional[str] = None
+    phone: Optional[str] = None
+    password: str
+    password_confirm: str
+
+class LoginIn(BaseModel):
+    login: str
+    password: str
+
+class UserOut(BaseModel):
+    id: int
+    email: Optional[str] = None
+    phone: Optional[str] = None
+    class Config:
+        from_attributes = True
+
+class TokenOut(BaseModel):
+    access_token: str
+    token_type: str
+    user: UserOut
+
+class BookingRequestOut(BaseModel):
+    id: int
+    tutor_id: int
+    tutor_name: str
+    user_id: Optional[int]
+    user_email: Optional[str]
+    user_phone: Optional[str]
+    request_type: str
+    created_at: str
+    class Config:
+        from_attributes = True

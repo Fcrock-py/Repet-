@@ -125,6 +125,19 @@ input {
     color: #9d9d9d;
 }
 
+.login-input-wrap.input-error {
+    border: 1.5px solid #e05555;
+    box-shadow: 0 0 0 2px rgba(224, 85, 85, 0.15);
+}
+
+.error-message {
+    font-size: 11px;
+    color: #e05555;
+    min-height: 14px;
+    padding-left: 4px;
+    margin-top: 3px;
+}
+
 .login-btn {
     margin-top: 30px;
     width: 250px;

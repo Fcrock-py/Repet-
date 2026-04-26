@@ -1,16 +1,18 @@
-from fastapi import FastAPI, Depends, Query, HTTPException
+from fastapi import FastAPI, Depends, Query, HTTPException, Header
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
 from sqlalchemy.orm import Session
-from sqlalchemy import func, event
+from sqlalchemy import event
 from sqlalchemy.engine import Engine
 from typing import Optional
 import sqlite3
 import re
 
 from database import SessionLocal, engine, Base
-from models import Subject, Application, Tutor
-from schemas import SubjectOut, ApplicationIn, ApplicationOut, TutorOut
-from fastapi.staticfiles import StaticFiles
+from models import Subject, Application, Tutor, User, BookingRequest
+from schemas import (SubjectOut, ApplicationIn, ApplicationOut, TutorOut, RegisterIn, LoginIn, TokenOut, UserOut, BookingRequestOut)
+import datetime
+from auth import hash_password, verify_password, create_token, verify_token
 
 Base.metadata.create_all(bind=engine)
 
@@ -37,6 +39,18 @@ def get_db():
         yield db
     finally:
         db.close()
+
+def get_current_user(authorization: Optional[str] = Header(None), db: Session = Depends(get_db)):
+    if not authorization or not authorization.startswith("Bearer "):
+        raise HTTPException(status_code=401, detail="Не авторизован")
+    token = authorization.replace("Bearer ", "")
+    user_id = verify_token(token)
+    if not user_id:
+        raise HTTPException(status_code=401, detail="Токен недействителен")
+    user = db.query(User).filter(User.id == user_id).first()
+    if not user:
+        raise HTTPException(status_code=401, detail="Пользователь не найден")
+    return user
 
 VALID_SUBJECTS = [
     'математика', 'русский язык', 'информатика', 'биология', 'химия',
@@ -79,6 +93,136 @@ def validate_application(data: ApplicationIn):
 @app.get("/")
 def root():
     return {"message": "Server is running"}
+
+@app.post("/auth/register", response_model=TokenOut)
+def register(data: RegisterIn, db: Session = Depends(get_db)):
+    errors = {}
+
+    if not data.email and not data.phone:
+        raise HTTPException(status_code=422, detail={"general": "Введите почту или телефон"})
+
+    if data.email:
+        email_regex = r'^[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$'
+        if not re.match(email_regex, data.email):
+            errors['email'] = 'Некорректная электронная почта'
+        else:
+            existing = db.query(User).filter(User.email == data.email).first()
+            if existing:
+                errors['email'] = 'Эта почта уже зарегистрирована'
+
+    if data.phone:
+        phone_regex = r'^\+7\(\d{3}\)\d{3}-\d{2}-\d{2}$'
+        if not re.match(phone_regex, data.phone):
+            errors['phone'] = 'Формат телефона: +7(000)000-00-00'
+        else:
+            existing = db.query(User).filter(User.phone == data.phone).first()
+            if existing:
+                errors['phone'] = 'Этот телефон уже зарегистрирован'
+
+    if len(data.password) < 6:
+        errors['password'] = 'Пароль должен быть не менее 6 символов'
+
+    if data.password != data.password_confirm:
+        errors['password_confirm'] = 'Пароли не совпадают'
+
+    if errors:
+        raise HTTPException(status_code=422, detail=errors)
+
+    user = User(
+        email=data.email if data.email else None,
+        phone=data.phone if data.phone else None,
+        password_hash=hash_password(data.password)
+    )
+    db.add(user)
+    db.commit()
+    db.refresh(user)
+
+    token = create_token(user.id)
+
+    return TokenOut(
+        access_token=token,
+        token_type="bearer",
+        user=UserOut(id=user.id, email=user.email, phone=user.phone)
+    )
+
+@app.post("/auth/login", response_model=TokenOut)
+def login(data: LoginIn, db: Session = Depends(get_db)):
+    login_val = data.login.strip()
+
+    user = None
+
+    if "@" in login_val:
+        user = db.query(User).filter(User.email == login_val).first()
+    else:
+        user = db.query(User).filter(User.phone == login_val).first()
+
+    if not user:
+        raise HTTPException(status_code=401, detail={"general": "Пользователь не найден"})
+
+    if not verify_password(data.password, user.password_hash):
+        raise HTTPException(status_code=401, detail={"general": "Неверный пароль"})
+
+    token = create_token(user.id)
+
+    return TokenOut(
+        access_token=token,
+        token_type="bearer",
+        user=UserOut(id=user.id, email=user.email, phone=user.phone)
+    )
+
+@app.get("/auth/me", response_model=UserOut)
+def get_me(current_user: User = Depends(get_current_user)):
+    return current_user
+
+@app.get("/users", response_model=list[UserOut])
+def get_all_users(db: Session = Depends(get_db)):
+    return db.query(User).order_by(User.id.desc()).all()
+
+@app.post("/booking", response_model=BookingRequestOut)
+def create_booking(
+    tutor_id: int = Query(...),
+    tutor_name: str = Query(...),
+    request_type: str = Query(...),
+    authorization: Optional[str] = Header(None),
+    db: Session = Depends(get_db)
+):
+    user_id = None
+    user_email = None
+    user_phone = None
+
+    if authorization and authorization.startswith("Bearer "):
+        token = authorization.replace("Bearer ", "")
+        uid = verify_token(token)
+        if uid:
+            user = db.query(User).filter(User.id == uid).first()
+            if user:
+                user_id = user.id
+                user_email = user.email
+                user_phone = user.phone
+
+    booking = BookingRequest(
+        tutor_id=tutor_id,
+        tutor_name=tutor_name,
+        user_id=user_id,
+        user_email=user_email,
+        user_phone=user_phone,
+        request_type=request_type,
+        created_at=datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    )
+    db.add(booking)
+    db.commit()
+    db.refresh(booking)
+    return booking
+
+@app.get("/booking", response_model=list[BookingRequestOut])
+def get_bookings(
+    user_id: Optional[int] = Query(default=None),
+    db: Session = Depends(get_db)
+):
+    query = db.query(BookingRequest)
+    if user_id is not None:
+        query = query.filter(BookingRequest.user_id == user_id)
+    return query.order_by(BookingRequest.id.desc()).all()
 
 @app.post("/applications", response_model=ApplicationOut)
 def create_application(data: ApplicationIn, db: Session = Depends(get_db)):

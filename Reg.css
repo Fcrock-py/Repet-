@@ -159,3 +159,22 @@ input {
     color: #5d5d5d;
     transform: translateY(-1px);
 }
+
+.login-title {
+    color: #77bfa4;
+    font-size: 22px;
+    margin-bottom: 20px;
+}
+
+.login-input-wrap.input-error {
+    border: 1.5px solid #e05555;
+    box-shadow: 0 0 0 2px rgba(224,85,85,0.15);
+}
+
+.error-message {
+    font-size: 11px;
+    color: #e05555;
+    min-height: 14px;
+    padding-left: 4px;
+    margin-top: 3px;
+}

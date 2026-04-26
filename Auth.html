@@ -18,37 +18,39 @@
             <form class="form">
                 <div class="field-group">
                     <label class="label">Логин:</label>
-                    <div class="login-input">
+                    <div class="login-input" id="wrap-login">
                         <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#4a4a4a" stroke-width="2">
                             <rect x="3" y="4" width="18" height="16" rx="2"></rect>
                             <circle cx="8.5" cy="10" r="1.5"></circle>
                             <path d="M21 16l-5.5-5.5a2 2 0 0 0-2.8 0L8 15.2"></path>
                         </svg>
-                        <input type="text" placeholder="Введите номер или электронную почту">
+                        <input type="text" id="login-input" placeholder="Введите номер или электронную почту">
                     </div>
+                    <div class="error-message" id="err-login"></div>
                 </div>
 
                 <div class="field-group">
                     <label class="label">Пароль:</label>
-                    <div class="login-input">
+                    <div class="login-input" id="wrap-password">
                         <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#4a4a4a" stroke-width="2">
                             <rect x="5" y="11" width="14" height="10" rx="2"></rect>
                             <path d="M8 11V8a4 4 0 1 1 8 0v3"></path>
                         </svg>
-                        <input type="password" placeholder="qwerty123">
+                        <input type="password" id="login-password" placeholder="qwerty123">
                     </div>
+                    <div class="error-message" id="err-password"></div>
                 </div>
 
-                <a href="repets.html"><button type="submit" class="login-btn">Войти</button></a>
+                 <div class="error-message" id="err-general"></div>
+
+                <button type="button" class="login-btn" id="loginBtn">Войти</button></a>
                 <a href="Reg.html" class="register-link">Зарегистрироваться</a>
             </form>
         </div>
     </main>
 
-    <script>
-        document.querySelector('.login-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-        });
-    </script>
+    <script src="auth.js"></script>
+    <script src="auth_redirect.js"></script>
+    <script src="apply_filters.js"></script>
 </body>
 </html>

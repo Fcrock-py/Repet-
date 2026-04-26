@@ -75,6 +75,7 @@ if (heroSearchInput) {
                     item.addEventListener('click', function() {
                         heroSearchInput.value = subject.name;
                         closeHeroBox();
+                        saveAndRedirect(subject.name, '', sessionStorage.getItem('selected_city') || '');
                     });
 
                     heroBox.appendChild(item);
@@ -261,6 +262,13 @@ document.querySelectorAll('.sphere-card').forEach(function(card) {
                     item.addEventListener('click', function() {
                         input.value = subject.name;
                         closeSuggestionBox(box);
+                        saveAndRedirect(subject.name, '', sessionStorage.getItem('selected_city') || '');
+                    });
+
+                    input.addEventListener('keydown', function(e) {
+                        if (e.key === 'Enter' && this.value.trim()) {
+                            saveAndRedirect(this.value.trim(), '', sessionStorage.getItem('selected_city') || '');
+                        }
                     });
 
                     box.appendChild(item);
@@ -499,3 +507,134 @@ if (submitBtn) {
         });
     });
 }
+
+function saveAndRedirect(subject, goal, city) {
+    console.log('saveAndRedirect вызван:', subject, goal, city);
+    if (subject) sessionStorage.setItem('selected_subject', subject);
+    if (goal) sessionStorage.setItem('selected_goal', goal);
+    if (city) sessionStorage.setItem('selected_city', city);
+    console.log('После записи subject:', sessionStorage.getItem('selected_subject'));
+    window.location.href = 'auth.html';
+}
+
+var currentExamType = 'ЕГЭ';
+
+document.querySelectorAll('.exam-tab').forEach(function(tab) {
+    tab.addEventListener('click', function() {
+        currentExamType = this.getAttribute('data-tab') === 'ege' ? 'ЕГЭ' : 'ОГЭ';
+        console.log('Тип экзамена изменён на:', currentExamType);
+    });
+});
+
+window.addEventListener('load', function() {
+
+    document.querySelectorAll('.exam-card').forEach(function(card) {
+        card.style.cursor = 'pointer';
+        card.addEventListener('click', function() {
+            var subject = this.querySelector('.exam-subject');
+            if (!subject) {
+                console.log('exam-subject не найден внутри карточки');
+                return;
+            }
+            console.log('Клик на карточку:', subject.textContent.trim());
+            saveAndRedirect(subject.textContent.trim(), currentExamType, sessionStorage.getItem('selected_city') || '');
+        });
+    });
+
+    document.querySelectorAll('.sphere-tags span').forEach(function(tag) {
+        tag.style.cursor = 'pointer';
+        tag.addEventListener('click', function() {
+            console.log('Клик на тег:', this.textContent.trim());
+            saveAndRedirect(this.textContent.trim(), '', sessionStorage.getItem('selected_city') || '');
+        });
+    });
+
+    var heroInput = document.querySelector('.hero-search input');
+    if (heroInput) {
+        heroInput.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') {
+                var val = this.value.trim();
+                console.log('Enter в hero поиске:', val);
+                if (val) saveAndRedirect(val, '', sessionStorage.getItem('selected_city') || '');
+            }
+        });
+    }
+
+    document.querySelectorAll('[data-dropdown="city"] .dropdown-menu a').forEach(function(link) {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            var city = this.textContent.trim();
+            console.log('Выбран город:', city);
+            sessionStorage.setItem('selected_city', city);
+            document.querySelectorAll('.dropdown').forEach(function(d) {
+                d.classList.remove('active');
+            });
+            var cityBtn = document.querySelector('[data-dropdown="city"] .dropdown-toggle');
+            if (cityBtn) {
+                cityBtn.childNodes[0].textContent = city + ' ';
+            }
+        });
+    });
+});
+
+var currentExamType = 'ЕГЭ';
+
+document.querySelectorAll('.exam-tab').forEach(function(tab) {
+    tab.addEventListener('click', function() {
+        currentExamType = this.getAttribute('data-tab') === 'ege' ? 'ЕГЭ' : 'ОГЭ';
+    });
+});
+
+document.querySelectorAll('.exam-card').forEach(function(card) {
+    card.style.cursor = 'pointer';
+    card.addEventListener('click', function() {
+        var subject = this.querySelector('.exam-subject').textContent.trim();
+        saveAndRedirect(subject, currentExamType, '');
+    });
+});
+
+document.querySelectorAll('.dropdown-menu a').forEach(function(link) {
+    if (link.closest('[data-dropdown="city"]')) {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            var city = this.textContent.trim();
+            sessionStorage.setItem('selected_city', city);
+            document.querySelectorAll('.dropdown').forEach(function(d) {
+                d.classList.remove('active');
+            });
+            var cityBtn = document.querySelector('[data-dropdown="city"] .dropdown-toggle');
+            if (cityBtn) {
+                cityBtn.childNodes[0].textContent = city + ' ';
+            }
+        });
+    }
+});
+
+var heroInput = document.querySelector('.hero-search input');
+if (heroInput) {
+    heroInput.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter') {
+            var val = this.value.trim();
+            if (val) saveAndRedirect(val, '', sessionStorage.getItem('selected_city') || '');
+        }
+    });
+}
+
+document.querySelectorAll('.sphere-tags span').forEach(function(tag) {
+    tag.style.cursor = 'pointer';
+    tag.addEventListener('click', function() {
+        saveAndRedirect(this.textContent.trim(), '', sessionStorage.getItem('selected_city') || '');
+    });
+});
+
+window.addEventListener('load', function() {
+    if (sessionStorage.getItem('scroll_to_apply') === '1') {
+        sessionStorage.removeItem('scroll_to_apply');
+        var tutorSection = document.querySelector('.tutor-section');
+        if (tutorSection) {
+            setTimeout(function() {
+                tutorSection.scrollIntoView({ behavior: 'smooth' });
+            }, 300);
+        }
+    }
+});
