@@ -1,0 +1,551 @@
+* { 
+    margin: 0; 
+    padding: 0; 
+    box-sizing: border-box; 
+}
+
+body { 
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; 
+    background: #ebebeb; 
+    color: #1a1a1a; 
+    min-height: 100vh; 
+    display: flex; 
+    flex-direction: column; 
+}
+
+a { 
+    text-decoration: none; 
+    color: inherit; 
+}
+
+button { 
+    cursor: pointer; 
+    font-family: inherit; 
+}
+
+input, textarea { 
+    font-family: inherit; 
+}
+
+.cab-header { 
+    background: #fff; 
+    padding: 16px 0; 
+    border-bottom: 1px solid #eee; 
+}
+
+.cab-header-inner { 
+    max-width: 1100px; 
+    margin: 0 auto; 
+    padding: 0 24px; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+}
+
+.logo { 
+    display: flex; 
+    align-items: center; 
+    gap: 6px; 
+}
+
+.logo-text { 
+    font-size: 26px; 
+    font-weight: 800; 
+    color: #2c3e6b; 
+}
+
+.logo-plus { 
+    color: #2c3e6b; 
+}
+
+.cab-main { 
+    flex: 1; 
+    display: flex; 
+    align-items: flex-start; 
+    justify-content: center; 
+    padding: 40px 24px; 
+}
+
+.cab-wrapper { 
+    display: flex; 
+    background: #fff; 
+    border-radius: 20px; 
+    overflow: hidden; 
+    width: 100%; 
+    max-width: 1480px; 
+    min-height: 600px; 
+    box-shadow: 0 4px 24px rgba(0,0,0,0.06); 
+}
+
+.cab-sidebar { 
+    width: 350px; 
+    flex-shrink: 0; 
+    border-right: 1px solid #f0f0f0; 
+    padding: 30px 0 30px 20px; 
+    display: flex; 
+    flex-direction: column; 
+    gap: 8px; 
+}
+
+.cab-back { 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    width: 36px; 
+    height: 36px; 
+    border-radius: 50%; 
+    background: #f5f5f5; 
+    margin-bottom: 16px; 
+    transition: background 0.2s ease; 
+}
+
+.cab-back:hover { 
+    background: #ebebeb; 
+}
+
+.cab-nav { 
+    display: flex; 
+    flex-direction: column; 
+    gap: 4px; 
+}
+
+.cab-nav-item { 
+    display: flex; 
+    align-items: center; 
+    gap: 12px; 
+    padding: 12px 16px; 
+    border: none; 
+    background: none; 
+    font-size: 14px; 
+    color: #555; 
+    border-radius: 10px 0 0 10px; 
+    text-align: left; 
+    transition: all 0.2s ease; 
+}
+
+.cab-nav-item:hover { 
+    background: #f5f5f5; 
+    color: #1a1a1a; 
+}
+
+.cab-nav-item.active { 
+    background: #eaf7f2; 
+    color: #1a1a1a; 
+    border-left: 3px solid #77bfa4; 
+    font-weight: 600; 
+}
+
+.cab-nav-item svg { 
+    flex-shrink: 0; 
+}
+
+.cab-nav-divider { 
+    height: 1px; 
+    background: #f0f0f0; 
+    margin: 10px 16px 10px 0; 
+}
+
+.cab-content { flex: 1; 
+    padding: 40px; 
+    display: flex; 
+    flex-direction: column; 
+    overflow: hidden; 
+}
+
+.cab-section { 
+    display: none; 
+    flex-direction: 
+    column; flex: 1; 
+}
+
+.cab-section.active { 
+    display: flex; 
+}
+
+.cab-avatar { 
+    width: 100px; 
+    height: 100px; 
+    border-radius: 50%; 
+    background: #e8e8e8; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    margin: 0 auto 16px; 
+}
+
+.cab-user-id { 
+    text-align: center; 
+    font-size: 16px; 
+    color: #555; 
+    margin-bottom: 28px; 
+}
+
+.cab-form { 
+    display: flex; 
+    flex-direction: column; 
+    gap: 16px; 
+}
+
+.cab-field { 
+    display: flex; 
+    flex-direction: column; 
+    gap: 6px; 
+}
+
+.cab-field label { 
+    font-size: 13px; 
+    font-weight: 600; 
+    color: #1a1a1a; 
+}
+
+.cab-field input, .cab-field textarea { 
+    padding: 12px 16px; 
+    border: 1.5px solid #e0e0e0; 
+    border-radius: 10px; 
+    font-size: 14px; 
+    outline: none; 
+    transition: border-color 0.2s ease; 
+    color: #1a1a1a; 
+    background: #fff; 
+}
+
+.cab-field input:focus, .cab-field textarea:focus { 
+    border-color: #77bfa4; 
+}
+
+.cab-field textarea { 
+    min-height: 120px; 
+    resize: vertical; 
+}
+
+.cab-form-submit { 
+    display: flex; 
+    justify-content: center; 
+    margin-top: 8px; 
+}
+
+.cab-save-btn { 
+    padding: 12px 40px; 
+    background: #77bfa4; 
+    color: #fff; 
+    border: none; 
+    border-radius: 24px; 
+    font-size: 14px; 
+    font-weight: 700; 
+    transition: all 0.2s ease; 
+}
+
+.cab-save-btn:hover { 
+    background: #69ae95; 
+    transform: scale(1.04); 
+}
+
+.cab-account-block { 
+    display: flex; 
+    flex-direction: column; 
+    gap: 10px; 
+    padding-bottom: 28px; 
+    border-bottom: 1px solid #f0f0f0; 
+    margin-bottom: 28px; 
+}
+
+.cab-account-block:last-child { 
+    border-bottom: none; 
+    margin-bottom: 0; 
+}
+
+.cab-account-label { 
+    font-size: 15px; 
+    font-weight: 700; 
+    color: #1a1a1a; 
+}
+.cab-danger-label { 
+    color: #e05555; 
+}
+
+.cab-account-hint { 
+    font-size: 12px; 
+    color: #aaa; 
+}
+
+.cab-account-input { 
+    padding: 12px 16px; 
+    border: 1.5px solid #e0e0e0; 
+    border-radius: 10px; 
+    font-size: 14px; 
+    outline: none; 
+    transition: border-color 0.2s ease; 
+}
+
+.cab-account-input:focus { 
+    border-color: #77bfa4; 
+}
+
+.cab-outline-btn { 
+    padding: 10px 24px; 
+    background: transparent; 
+    border: 1.5px solid #77bfa4; 
+    color: #77bfa4; 
+    border-radius: 24px; 
+    font-size: 13px; 
+    font-weight: 700; 
+    width: fit-content; 
+    transition: all 0.2s ease; 
+}
+
+.cab-outline-btn:hover { 
+    background: #eaf7f2; 
+    transform: scale(1.03); 
+}
+
+.cab-danger-btn { 
+    padding: 10px 24px; 
+    background: transparent; 
+    border: 1.5px solid #e05555; 
+    color: #e05555; 
+    border-radius: 24px; 
+    font-size: 13px; 
+    font-weight: 700; 
+    width: fit-content; 
+    transition: all 0.2s ease; 
+}
+
+.cab-danger-btn:hover { 
+    background: #fff0f0; 
+    transform: scale(1.03); 
+}
+
+.cab-empty { 
+    text-align: center; 
+    color: #bbb; 
+    font-size: 15px; 
+    padding: 60px 20px; 
+}
+
+.cab-empty-large { 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    flex: 1; 
+    font-size: 18px; 
+    color: #bbb; 
+    text-align: center; 
+}
+
+.cab-booking-card { 
+    background: #f9f9f9; 
+    border-radius: 14px; 
+    padding: 20px; 
+    display: flex; 
+    flex-direction: column; 
+    gap: 8px; 
+    margin-bottom: 12px; 
+}
+
+.cab-booking-tutor { 
+    font-size: 16px; 
+    font-weight: 700; 
+}
+
+.cab-booking-type { 
+    font-size: 13px; 
+    color: #77bfa4; 
+    font-weight: 600; 
+}
+
+.cab-booking-date { 
+    font-size: 12px; 
+    color: #bbb; 
+}
+
+.cab-bookings-list { 
+    display: flex; 
+    flex-direction: column; 
+}
+
+.cab-favorites-list { 
+    display: flex; 
+    flex-direction: column; 
+    gap: 16px; 
+}
+
+.cab-fav-card { 
+    background: #f9f9f9; 
+    border-radius: 14px; 
+    padding: 20px; 
+    display: flex; 
+    gap: 16px; 
+    transition: box-shadow 0.2s ease; 
+}
+
+.cab-fav-card:hover { 
+    box-shadow: 0 4px 16px rgba(0,0,0,0.08); 
+}
+
+.cab-fav-img { 
+    width: 100px; 
+    height: 100px; 
+    border-radius: 10px; 
+    object-fit: cover; 
+    flex-shrink: 0; 
+    background: #ddd; 
+}
+
+.cab-fav-info { 
+    flex: 1; 
+    display: flex; 
+    flex-direction: column; 
+    gap: 6px; 
+}
+
+.cab-fav-name { 
+    font-size: 16px; 
+    font-weight: 800; 
+}
+
+.cab-fav-subject { 
+    font-size: 13px; 
+    color: #888; 
+}
+
+.cab-fav-right { 
+    display: flex; 
+    flex-direction: column; 
+    gap: 8px; 
+    align-items: flex-end; 
+}
+
+.cab-fav-price { 
+    font-size: 16px; 
+    font-weight: 800; 
+}
+
+.cab-fav-heart { 
+    color: #e05555; 
+}
+
+.cab-chat { 
+    display: flex; 
+    flex-direction: column; 
+    flex: 1; gap: 0; 
+}
+
+.cab-chat-messages { 
+    flex: 1; 
+    display: flex; 
+    flex-direction: column; 
+    gap: 12px; 
+    padding: 10px 0 20px; 
+    overflow-y: auto; 
+    min-height: 300px; 
+}
+
+.cab-chat-msg { 
+    max-width: 70%; 
+    padding: 12px 18px; 
+    border-radius: 18px; 
+    font-size: 14px; 
+    line-height: 1.5; 
+}
+
+.cab-chat-bot { 
+    background: #f0f0f0; 
+    color: #1a1a1a; 
+    border-radius: 4px 18px 18px 18px; 
+    align-self: flex-start; 
+}
+
+.cab-chat-user { 
+    background: #77bfa4; 
+    color: #fff; 
+    border-radius: 18px 4px 18px 18px; 
+    align-self: flex-end; 
+}
+
+.cab-chat-input-wrap { 
+    display: flex; 
+    gap: 10px; 
+    align-items: center; 
+    border-top: 1px solid #f0f0f0; 
+    padding-top: 16px; 
+}
+
+.cab-chat-input-wrap input { 
+    flex: 1; 
+    padding: 12px 18px; 
+    border: 1.5px solid #e0e0e0; 
+    border-radius: 24px; 
+    font-size: 14px; 
+    outline: none; 
+    transition: border-color 0.2s ease; 
+}
+
+.cab-chat-input-wrap input:focus { 
+    border-color: #77bfa4; 
+}
+
+.cab-chat-input-wrap button { 
+    width: 40px; 
+    height: 40px; 
+    border-radius: 50%; 
+    background: #77bfa4; 
+    border: none; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    color: #fff; 
+    flex-shrink: 0; 
+    transition: all 0.2s ease; 
+}
+
+.cab-chat-input-wrap button:hover { 
+    background: #69ae95; 
+    transform: scale(1.08); 
+}
+
+.cab-badge { 
+    padding: 3px 10px; 
+    border-radius: 20px; 
+    font-size: 11px; 
+    font-weight: 600; 
+}
+
+.cab-badge-teal { 
+    background: #c0f5d8; 
+    color: #2a7a50; 
+}
+
+.cab-badge-purple { 
+    background: #e8d8f8; 
+    color: #6a2a9a; 
+}
+
+.cab-badge-blue { 
+    background: #d0e8f8; 
+    color: #1a5a8a; 
+}
+
+.cab-footer { 
+    background: #fff; 
+    padding: 0 20px; 
+    min-width: 1520px;
+    margin: 0 auto;
+    
+}
+
+.cab-footer-divider { 
+    height: 1px; 
+    background: #e0e0e0; 
+    margin-bottom: 16px; 
+}
+
+.cab-footer-copy { 
+    text-align: left; 
+    padding: 0 40px; 
+}
+
+.cab-footer-copy p { 
+    font-size: 11px; 
+    color: #999; 
+    line-height: 1.5; 
+}

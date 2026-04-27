@@ -9,8 +9,8 @@ import sqlite3
 import re
 
 from database import SessionLocal, engine, Base
-from models import Subject, Application, Tutor, User, BookingRequest
-from schemas import (SubjectOut, ApplicationIn, ApplicationOut, TutorOut, RegisterIn, LoginIn, TokenOut, UserOut, BookingRequestOut)
+from models import Subject, Application, Tutor, User, BookingRequest, UserProfile, FavoriteTutor
+from schemas import (SubjectOut, ApplicationIn, ApplicationOut, TutorOut, RegisterIn, LoginIn, TokenOut, UserOut, BookingRequestOut, UserProfileIn, UserProfileOut, FavoriteTutorIn, FavoriteTutorOut)
 import datetime
 from auth import hash_password, verify_password, create_token, verify_token
 
@@ -173,6 +173,93 @@ def login(data: LoginIn, db: Session = Depends(get_db)):
 @app.get("/auth/me", response_model=UserOut)
 def get_me(current_user: User = Depends(get_current_user)):
     return current_user
+
+@app.get("/profile", response_model=UserProfileOut)
+def get_profile(current_user: User = Depends(get_current_user), db: Session = Depends(get_db)):
+    profile = db.query(UserProfile).filter(UserProfile.user_id == current_user.id).first()
+    if not profile:
+        profile = UserProfile(user_id=current_user.id)
+        db.add(profile)
+        db.commit()
+        db.refresh(profile)
+    return profile
+
+@app.post("/profile", response_model=UserProfileOut)
+def update_profile(data: UserProfileIn, current_user: User = Depends(get_current_user), db: Session = Depends(get_db)):
+    profile = db.query(UserProfile).filter(UserProfile.user_id == current_user.id).first()
+    if not profile:
+        profile = UserProfile(user_id=current_user.id)
+        db.add(profile)
+    profile.last_name = data.last_name
+    profile.first_name = data.first_name
+    profile.middle_name = data.middle_name
+    profile.about = data.about
+    profile.subjects = data.subjects
+    db.commit()
+    db.refresh(profile)
+    return profile
+
+@app.put("/account/email")
+def update_email(email: str = Query(...), current_user: User = Depends(get_current_user), db: Session = Depends(get_db)):
+    email_regex = r'^[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$'
+    if not re.match(email_regex, email):
+        raise HTTPException(status_code=422, detail="Некорректная почта")
+    existing = db.query(User).filter(User.email == email).first()
+    if existing and existing.id != current_user.id:
+        raise HTTPException(status_code=422, detail="Эта почта уже используется")
+    current_user.email = email
+    db.commit()
+    return {"message": "Почта обновлена", "email": email}
+
+@app.put("/account/phone")
+def update_phone(phone: str = Query(...), current_user: User = Depends(get_current_user), db: Session = Depends(get_db)):
+    phone_regex = r'^\+7\(\d{3}\)\d{3}-\d{2}-\d{2}$'
+    if not re.match(phone_regex, phone):
+        raise HTTPException(status_code=422, detail="Формат: +7(000)000-00-00")
+    existing = db.query(User).filter(User.phone == phone).first()
+    if existing and existing.id != current_user.id:
+        raise HTTPException(status_code=422, detail="Этот номер уже используется")
+    current_user.phone = phone
+    db.commit()
+    return {"message": "Телефон обновлён", "phone": phone}
+
+@app.delete("/account")
+def delete_account(current_user: User = Depends(get_current_user), db: Session = Depends(get_db)):
+    db.query(UserProfile).filter(UserProfile.user_id == current_user.id).delete()
+    db.query(BookingRequest).filter(BookingRequest.user_id == current_user.id).delete()
+    db.query(FavoriteTutor).filter(FavoriteTutor.user_id == current_user.id).delete()
+    db.delete(current_user)
+    db.commit()
+    return {"message": "Аккаунт удалён"}
+
+@app.get("/favorites", response_model=list[FavoriteTutorOut])
+def get_favorites(current_user: User = Depends(get_current_user), db: Session = Depends(get_db)):
+    return db.query(FavoriteTutor).filter(FavoriteTutor.user_id == current_user.id).all()
+
+@app.post("/favorites", response_model=FavoriteTutorOut)
+def add_favorite(data: FavoriteTutorIn, current_user: User = Depends(get_current_user), db: Session = Depends(get_db)):
+    existing = db.query(FavoriteTutor).filter(
+        FavoriteTutor.user_id == current_user.id,
+        FavoriteTutor.tutor_id == data.tutor_id
+    ).first()
+    if existing:
+        return existing
+    fav = FavoriteTutor(user_id=current_user.id, **data.dict())
+    db.add(fav)
+    db.commit()
+    db.refresh(fav)
+    return fav
+
+@app.delete("/favorites/{tutor_id}")
+def remove_favorite(tutor_id: int, current_user: User = Depends(get_current_user), db: Session = Depends(get_db)):
+    fav = db.query(FavoriteTutor).filter(
+        FavoriteTutor.user_id == current_user.id,
+        FavoriteTutor.tutor_id == tutor_id
+    ).first()
+    if fav:
+        db.delete(fav)
+        db.commit()
+    return {"message": "Удалено из избранного"}
 
 @app.get("/users", response_model=list[UserOut])
 def get_all_users(db: Session = Depends(get_db)):

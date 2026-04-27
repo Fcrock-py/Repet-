@@ -54,3 +54,30 @@ class BookingRequest(Base):
     user_phone = Column(String, nullable=True)
     request_type = Column(String, nullable=False)
     created_at = Column(String, nullable=False)
+
+class UserProfile(Base):
+    __tablename__ = "user_profiles"
+    id = Column(Integer, primary_key=True, index=True)
+    user_id = Column(Integer, unique=True, nullable=False)
+    last_name = Column(String, nullable=True)
+    first_name = Column(String, nullable=True)
+    middle_name = Column(String, nullable=True)
+    about = Column(String, nullable=True)
+    subjects = Column(String, nullable=True)
+
+class FavoriteTutor(Base):
+    __tablename__ = "favorite_tutors"
+    id = Column(Integer, primary_key=True, index=True)
+    user_id = Column(Integer, nullable=False)
+    tutor_id = Column(Integer, nullable=False)
+    tutor_name = Column(String, nullable=False)
+    tutor_subject = Column(String, nullable=False)
+    tutor_price = Column(Integer, nullable=False)
+    tutor_rating = Column(Float, nullable=False)
+    tutor_students = Column(Integer, nullable=False)
+    tutor_lessons = Column(Integer, nullable=False)
+    tutor_reviews = Column(String, nullable=False)
+    tutor_description = Column(String, nullable=False)
+    tutor_languages = Column(String, nullable=False)
+    tutor_badge = Column(String, nullable=False)
+    tutor_image_url = Column(String, nullable=False)

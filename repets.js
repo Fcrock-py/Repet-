@@ -76,6 +76,13 @@ if (profileBtn && profileMenu) {
     });
 }
 
+var cabinetBtn = document.getElementById('cabinetBtn');
+if (cabinetBtn) {
+    cabinetBtn.addEventListener('click', function() {
+        window.location.href = 'cabinet.html';
+    });
+}
+
 var favoritesBtn = document.getElementById('favoritesBtn');
 if (favoritesBtn) {
     favoritesBtn.addEventListener('click', function() {
@@ -338,15 +345,50 @@ function renderTutors(tutors) {
         var favBtn = card.querySelector('.tutor-favorite');
         if (favBtn) {
             var favActive = false;
+
+            fetch(API + '/favorites', { headers: { 'Authorization': 'Bearer ' + (localStorage.getItem('token') || '') } })
+            .then(function(r) { return r.json(); })
+            .then(function(favs) {
+                var isFav = favs.some(function(f) { return f.tutor_id === t.id; });
+                if (isFav) {
+                    favActive = true;
+                    var svg = favBtn.querySelector('svg');
+                    svg.setAttribute('fill', '#e05555');
+                    svg.setAttribute('stroke', '#e05555');
+                }
+            });
+
             favBtn.addEventListener('click', function() {
                 favActive = !favActive;
                 var svg = this.querySelector('svg');
                 if (favActive) {
                     svg.setAttribute('fill', '#e05555');
                     svg.setAttribute('stroke', '#e05555');
+                    fetch(API + '/favorites', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + (localStorage.getItem('token') || '') },
+                        body: JSON.stringify({
+                            tutor_id: t.id,
+                            tutor_name: t.name,
+                            tutor_subject: t.subject,
+                            tutor_price: t.price,
+                            tutor_rating: t.rating,
+                            tutor_students: t.students,
+                            tutor_lessons: t.lessons,
+                            tutor_reviews: t.reviews,
+                            tutor_description: t.description,
+                            tutor_languages: t.languages,
+                            tutor_badge: t.badge,
+                            tutor_image_url: t.image_url
+                        })
+                    });
                 } else {
                     svg.setAttribute('fill', 'none');
                     svg.setAttribute('stroke', '#ccc');
+                    fetch(API + '/favorites/' + t.id, {
+                        method: 'DELETE',
+                        headers: { 'Authorization': 'Bearer ' + (localStorage.getItem('token') || '') }
+                    });
                 }
             });
         }

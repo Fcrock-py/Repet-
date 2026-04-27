@@ -94,3 +94,53 @@ class BookingRequestOut(BaseModel):
     created_at: str
     class Config:
         from_attributes = True
+
+class UserProfileIn(BaseModel):
+    last_name: Optional[str] = None
+    first_name: Optional[str] = None
+    middle_name: Optional[str] = None
+    about: Optional[str] = None
+    subjects: Optional[str] = None
+
+class UserProfileOut(BaseModel):
+    id: int
+    user_id: int
+    last_name: Optional[str] = None
+    first_name: Optional[str] = None
+    middle_name: Optional[str] = None
+    about: Optional[str] = None
+    subjects: Optional[str] = None
+    class Config:
+        from_attributes = True
+
+class FavoriteTutorIn(BaseModel):
+    tutor_id: int
+    tutor_name: str
+    tutor_subject: str
+    tutor_price: int
+    tutor_rating: float
+    tutor_students: int
+    tutor_lessons: int
+    tutor_reviews: str
+    tutor_description: str
+    tutor_languages: str
+    tutor_badge: str
+    tutor_image_url: str
+
+class FavoriteTutorOut(BaseModel):
+    id: int
+    user_id: int
+    tutor_id: int
+    tutor_name: str
+    tutor_subject: str
+    tutor_price: int
+    tutor_rating: float
+    tutor_students: int
+    tutor_lessons: int
+    tutor_reviews: str
+    tutor_description: str
+    tutor_languages: str
+    tutor_badge: str
+    tutor_image_url: str
+    class Config:
+        from_attributes = True

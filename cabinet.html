@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Личный кабинет | Repet+</title>
+    <link rel="stylesheet" href="styleMain.css">
+    <link rel="stylesheet" href="cabinet.css">
+</head>
+<body>
+    <header class="cab-header">
+        <div class="cab-header-inner">
+            <div class="logo">
+                <a href="repets.html"><div class="logo-icon">
+                    <img src="images/Frame 20.png">
+                </div></a>
+            </div>
+        </div>
+    </header>
+
+    <main class="cab-main">
+        <div class="cab-wrapper">
+            <div class="cab-sidebar">
+                <a href="repets.html" class="cab-back">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5"/><path d="M12 5l-7 7 7 7"/></svg>
+                </a>
+                <nav class="cab-nav">
+                    <button class="cab-nav-item active" data-section="profile">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                        Личный кабинет
+                    </button>
+                    <button class="cab-nav-item" data-section="account">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+                        Аккаунт
+                    </button>
+                    <button class="cab-nav-item" data-section="bookings">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+                        Отправленные заявки
+                    </button>
+                    <div class="cab-nav-divider"></div>
+                    <button class="cab-nav-item" data-section="favorites">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                        Сохраненные репетиторы
+                    </button>
+                    <button class="cab-nav-item" data-section="materials">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="9"/><rect x="14" y="3" width="7" height="5"/><rect x="14" y="12" width="7" height="9"/><rect x="3" y="16" width="7" height="5"/></svg>
+                        Учебные материалы
+                    </button>
+                    <button class="cab-nav-item" data-section="support">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                        Тех. поддержка
+                    </button>
+                </nav>
+            </div>
+
+            <div class="cab-content">
+                <div class="cab-section active" id="section-profile">
+                    <div class="cab-avatar">
+                        <svg width="60" height="60" viewBox="0 0 24 24" fill="#ccc" stroke="none"><path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/></svg>
+                    </div>
+                    <div class="cab-user-id" id="cab-user-contact"></div>
+                    <div class="cab-form">
+                        <div class="cab-field">
+                            <label>Фамилия</label>
+                            <input type="text" id="prof-lastname" placeholder="Введите свою фамилию">
+                        </div>
+                        <div class="cab-field">
+                            <label>Имя</label>
+                            <input type="text" id="prof-firstname" placeholder="Введите своё имя">
+                        </div>
+                        <div class="cab-field">
+                            <label>Отчество</label>
+                            <input type="text" id="prof-middlename" placeholder="Введите своё отчество">
+                        </div>
+                        <div class="cab-field">
+                            <label>Расскажите о себе</label>
+                            <textarea id="prof-about" placeholder="Здесь можно написать о себе"></textarea>
+                        </div>
+                        <div class="cab-field">
+                            <label>Интересующие предметы</label>
+                            <input type="text" id="prof-subjects" placeholder="Напишите предметы, по которым вы бы хотели найти репетитора">
+                        </div>
+                        <div class="cab-form-submit">
+                            <button class="cab-save-btn" id="saveProfileBtn">Обновить профиль</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="cab-section" id="section-account">
+                    <div class="cab-account-block">
+                        <div class="cab-account-label">Изменить электронную почту</div>
+                        <input type="email" class="cab-account-input" id="acc-email" placeholder="example@gmail.com">
+                        <div class="cab-account-hint" id="acc-email-hint"></div>
+                        <button class="cab-outline-btn" id="changeEmailBtn">Поменять почту</button>
+                    </div>
+                    <div class="cab-account-block">
+                        <div class="cab-account-label">Изменить телефон</div>
+                        <input type="tel" class="cab-account-input" id="acc-phone" placeholder="+7(000)000-00-00">
+                        <div class="cab-account-hint" id="acc-phone-hint"></div>
+                        <button class="cab-outline-btn" id="changePhoneBtn">Прикрепить номер</button>
+                    </div>
+                    <div class="cab-account-block">
+                        <div class="cab-account-label cab-danger-label">Выйти из аккаунта</div>
+                        <div class="cab-account-hint">Вам придётся снова проходить авторизацию</div>
+                        <button class="cab-danger-btn" id="cabLogoutBtn">Выйти из аккаунта</button>
+                    </div>
+                    <div class="cab-account-block">
+                        <div class="cab-account-label cab-danger-label">Удалить аккаунт</div>
+                        <div class="cab-account-hint">Если вы удалите аккаунт, данные будут безвозвратно удалены</div>
+                        <button class="cab-danger-btn" id="deleteAccountBtn">Удалить аккаунт</button>
+                    </div>
+                </div>
+
+                <div class="cab-section" id="section-bookings">
+                    <div class="cab-bookings-list" id="cab-bookings-list">
+                        <div class="cab-empty">Загрузка...</div>
+                    </div>
+                </div>
+
+                <div class="cab-section" id="section-favorites">
+                    <div class="cab-favorites-list" id="cab-favorites-list">
+                        <div class="cab-empty">Загрузка...</div>
+                    </div>
+                </div>
+
+                <div class="cab-section" id="section-materials">
+                    <div class="cab-empty-large">Упс, видимо у вас нет учебных материалов...</div>
+                </div>
+
+                <div class="cab-section" id="section-support">
+                    <div class="cab-chat">
+                        <div class="cab-chat-messages" id="cab-chat-messages">
+                            <div class="cab-chat-msg cab-chat-bot">
+                                У вас появились какие либо вопросы? Вы можете задать их здесь и мы вам обязательно поможем!
+                            </div>
+                        </div>
+                        <div class="cab-chat-input-wrap">
+                            <input type="text" id="cab-chat-input" placeholder="Опишите свою проблему...">
+                            <button id="cab-chat-send">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer" style="padding: 10px;">
+        <div class="footer-inner">
+            <div class="footer-divider"></div>
+            <div class="footer-copyright">
+                <p>© 2026, Сервис подбора репетиторов REPET+</p>
+                <p>ООО «НАЙДИ РЕПЕТИТОРА», ОГРН 676922842</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="cabinet.js"></script>
+</body>
+</html>
